@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import Fingerboard from './components/fingerboard'
+import * as Note from 'tonal-note'
+
+const StyledApp = styled.div`
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #222222;
+`
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <StyledApp>
+        <Fingerboard />
+      </StyledApp>
+    )
   }
 }
 
-export default App;
+export default App
