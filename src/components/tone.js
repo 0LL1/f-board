@@ -7,12 +7,14 @@ const StyledTone = styled.div`
   align-items: center;
   justify-content: center;
   border: solid 1px;
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3rem;
 `
 
 const Tone = props => {
-  return <StyledTone>{Note.fromMidi(props.tone)}</StyledTone>
+  const tone = Note.fromMidi(props.tone)
+
+  return <StyledTone>{Note.pc(tone)}</StyledTone>
 }
 
 export default Tone

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Fingerboard from './components/fingerboard'
-import * as Note from 'tonal-note'
+// import * as Note from 'tonal-note'
 
 const StyledApp = styled.div`
   display: grid;
@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <StyledApp>
-        <Fingerboard />
+        <Fingerboard selected={this.state.selected} />
       </StyledApp>
     )
   }

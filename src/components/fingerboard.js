@@ -15,7 +15,14 @@ class Fingerboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tuning: [Note.midi(64), Note.midi(69), Note.midi(74)]
+      tuning: [
+        Note.midi(64),
+        Note.midi(69),
+        Note.midi(74),
+        Note.midi(79),
+        Note.midi(83),
+        Note.midi(88)
+      ]
     }
   }
   render() {
@@ -24,6 +31,9 @@ class Fingerboard extends Component {
         <String tuning={this.state.tuning[0]} />
         <String tuning={this.state.tuning[1]} />
         <String tuning={this.state.tuning[2]} />
+        <String tuning={this.state.tuning[3]} />
+        <String tuning={this.state.tuning[4]} />
+        <String tuning={this.state.tuning[5]} />
       </StyledFingerboard>
     )
   }
