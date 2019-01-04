@@ -1,19 +1,43 @@
 import React, { Component } from 'react'
-import Tone from '../components/tone'
 import styled from 'styled-components'
-// import * as Note from 'tonal-note'
+import * as Note from 'tonal-note'
 
 const StyledString = styled.div`
-  border: solid 1px;
   display: flex;
   flex-direction: column;
+  .fret {
+    width: 2.8rem;
+    height: 2.8rem;
+    border: none;
+    margin: 1px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222222;
+    color: #ffffff;
+    :nth-child(1) {
+      height: 1.8rem;
+      background-color: #ffffff;
+      color: #222222;
+    }
+    :nth-last-child(1) {
+      border: none;
+    }
+  }
+  /* [class~='C'] {
+    background-color: #ffdc00;
+    color: black; */
+  }
   .sharpen {
-    background-color: green;
+    height: 1.8rem;
+    background-color: #2ecc40;
     font-size: 1rem;
     color: white;
   }
   .flatten {
-    background-color: red;
+    height: 1.8rem;
+    background-color: #ff4136;
     font-size: 1rem;
     color: white;
   }
@@ -22,7 +46,8 @@ class String extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tuning: props.tuning
+      tuning: props.tuning,
+      fretCount: 13
     }
   }
 
@@ -39,26 +64,27 @@ class String extends Component {
   }
 
   render() {
+    const fretCount = Array.from({ length: this.state.fretCount }, (v, i) => i)
+    const tones = fretCount.map(fret =>
+      Note.fromMidi(Note.midi(this.state.tuning + fret))
+    )
+    const frets = tones.map(tone => (
+      <button
+        className={`fret ${Note.pc(tone)}`}
+        onClick={() => this.props.select(tone)}
+      >
+        {Note.pc(tone)}
+      </button>
+    ))
     return (
       <StyledString>
-        <button className='sharpen' onClick={this.sharpen}>
+        <button className="sharpen" onClick={this.sharpen}>
           +
         </button>
-        <button className='flatten' onClick={this.flatten}>
+        <button className="flatten" onClick={this.flatten}>
           -
         </button>
-        <Tone tone={this.state.tuning} />
-        <Tone tone={this.state.tuning + 1} />
-        <Tone tone={this.state.tuning + 2} />
-        <Tone tone={this.state.tuning + 3} />
-        <Tone tone={this.state.tuning + 4} />
-        <Tone tone={this.state.tuning + 5} />
-        <Tone tone={this.state.tuning + 6} />
-        <Tone tone={this.state.tuning + 7} />
-        <Tone tone={this.state.tuning + 8} />
-        <Tone tone={this.state.tuning + 9} />
-        <Tone tone={this.state.tuning + 10} />
-        <Tone tone={this.state.tuning + 11} />
+        <div>{frets}</div>
       </StyledString>
     )
   }

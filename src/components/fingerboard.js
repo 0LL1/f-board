@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import * as Note from 'tonal-note'
 
 const StyledFingerboard = styled.div`
-  border: solid 1px;
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: center;
+  background-color: #ffffff;
 `
 
 class Fingerboard extends Component {
@@ -22,20 +22,27 @@ class Fingerboard extends Component {
         Note.midi(79),
         Note.midi(83),
         Note.midi(88)
-      ]
+      ],
+      selected: []
     }
   }
+
+  select = e => {
+    // e.preventDefault()
+    this.setState(state => {
+      return { selected: state.selected.concat(Note.pc(e)) }
+    })
+  }
+
   render() {
-    return (
-      <StyledFingerboard>
-        <String tuning={this.state.tuning[0]} />
-        <String tuning={this.state.tuning[1]} />
-        <String tuning={this.state.tuning[2]} />
-        <String tuning={this.state.tuning[3]} />
-        <String tuning={this.state.tuning[4]} />
-        <String tuning={this.state.tuning[5]} />
-      </StyledFingerboard>
-    )
+    const strings = this.state.tuning.map(tuning => (
+      <String
+        tuning={tuning}
+        selected={this.state.selected}
+        select={this.select}
+      />
+    ))
+    return <StyledFingerboard>{strings}</StyledFingerboard>
   }
 }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Fingerboard from './components/fingerboard'
-// import * as Note from 'tonal-note'
 
 const StyledApp = styled.div`
   display: grid;
@@ -15,12 +14,14 @@ const StyledApp = styled.div`
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      //
+    }
   }
   render() {
     return (
       <StyledApp>
-        <Fingerboard selected={this.state.selected} />
+        <Fingerboard />
       </StyledApp>
     )
   }
