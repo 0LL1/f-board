@@ -12,32 +12,30 @@ const StyledFingerboard = styled.div`
 `
 
 class Fingerboard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tuning: [
-        Note.midi(64),
-        Note.midi(69),
-        Note.midi(74),
-        Note.midi(79),
-        Note.midi(83),
-        Note.midi(88)
-      ],
-      selected: []
-    }
+  state = {
+    tuning: [64, 69, 74, 79, 83, 88],
+    fretCount: 13,
+    selected: new Set()
   }
 
-  select = e => {
-    // e.preventDefault()
-    this.setState(state => {
-      return { selected: state.selected.concat(Note.pc(e)) }
-    })
+  select = tone => {
+    !this.state.selected.has(Note.pc(tone))
+      ? this.setState(
+          prevState => new Set(prevState.selected.add(Note.pc(tone)))
+        )
+      : this.setState(prevState => {
+          prevState.selected.delete(Note.pc(tone))
+          new Set(prevState.selected)
+          this.forceUpdate()
+        })
   }
 
   render() {
     const strings = this.state.tuning.map(tuning => (
       <String
+        key={tuning}
         tuning={tuning}
+        fretCount={this.state.fretCount}
         selected={this.state.selected}
         select={this.select}
       />

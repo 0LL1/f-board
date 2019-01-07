@@ -5,76 +5,74 @@ import * as Note from 'tonal-note'
 const StyledString = styled.div`
   display: flex;
   flex-direction: column;
-  .fret {
-    width: 2.8rem;
-    height: 2.8rem;
-    border: none;
-    margin: 1px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #222222;
-    color: #ffffff;
-    :nth-child(1) {
-      height: 1.8rem;
-      background-color: #ffffff;
-      color: #222222;
-    }
-    :nth-last-child(1) {
-      border: none;
-    }
-  }
-  /* [class~='C'] {
-    background-color: #ffdc00;
-    color: black; */
-  }
   .sharpen {
+    cursor: pointer;
     height: 1.8rem;
     background-color: #2ecc40;
     font-size: 1rem;
     color: white;
   }
   .flatten {
+    cursor: pointer;
     height: 1.8rem;
     background-color: #ff4136;
     font-size: 1rem;
     color: white;
   }
 `
+const StyledNote = styled.div`
+  cursor: pointer;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: none;
+  margin: 1px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => (props.selected ? '#ffdc00' : '#222222')};
+  color: ${props => (props.selected ? '#222222' : '#ffffff')};
+  :nth-child(1) {
+    height: 1.8rem;
+    background-color: #ffffff;
+    color: #222222;
+  }
+}
+`
 class String extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tuning: props.tuning,
-      fretCount: 13
-    }
+  state = {
+    tuning: this.props.tuning,
+    fretCount: this.props.fretCount
   }
 
   sharpen = () => {
-    this.setState(state => {
-      return { tuning: state.tuning + 1 }
+    this.setState(prevState => {
+      return { tuning: prevState.tuning + 1 }
     })
   }
 
   flatten = () => {
-    this.setState(state => {
-      return { tuning: state.tuning - 1 }
+    this.setState(prevState => {
+      return { tuning: prevState.tuning - 1 }
     })
   }
 
+  selected = tone => this.props.selected.has(Note.pc(tone))
+
   render() {
-    const fretCount = Array.from({ length: this.state.fretCount }, (v, i) => i)
-    const tones = fretCount.map(fret =>
+    const frets = Array.from({ length: this.state.fretCount }, (v, i) => i)
+    const tones = frets.map(fret =>
       Note.fromMidi(Note.midi(this.state.tuning + fret))
     )
-    const frets = tones.map(tone => (
-      <button
+    const notes = tones.map(tone => (
+      <StyledNote
+        key={tone}
         className={`fret ${Note.pc(tone)}`}
         onClick={() => this.props.select(tone)}
+        selected={this.selected(tone)}
       >
         {Note.pc(tone)}
-      </button>
+      </StyledNote>
     ))
     return (
       <StyledString>
@@ -84,7 +82,7 @@ class String extends Component {
         <button className="flatten" onClick={this.flatten}>
           -
         </button>
-        <div>{frets}</div>
+        <div>{notes}</div>
       </StyledString>
     )
   }
