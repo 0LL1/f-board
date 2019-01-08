@@ -21,7 +21,7 @@ const StyledNote = styled.div`
   color: ${props => (props.selected ? '#222222' : '#ffffff')};
   :nth-child(1) {
     height: 1.8rem;
-    background-color: #ffffff;
+    background-color: ${props => (props.selected ? '#ffdc00' : '#ffffff')};
     color: #222222;
   }
 `
@@ -76,8 +76,8 @@ class String extends Component {
     ))
     return (
       <StyledString>
-        <Sharpen onClick={this.sharpen}>+</Sharpen>
-        <Flatten onClick={this.flatten}>-</Flatten>
+        <Sharpen onClick={this.sharpen}>P+</Sharpen>
+        <Flatten onClick={this.flatten}>P-</Flatten>
         <div>{notes}</div>
       </StyledString>
     )

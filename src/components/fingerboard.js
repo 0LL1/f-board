@@ -3,12 +3,41 @@ import styled from 'styled-components'
 import * as Note from 'tonal-note'
 import String from '../components/string'
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const StyledFingerboard = styled.div`
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: center;
   background-color: #ffffff;
+`
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Adder = styled.button`
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: #2ecc40;
+  font-size: 1rem;
+  color: #ffffff;
+`
+
+const Remover = styled.button`
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: #ff4136;
+  font-size: 1rem;
+  color: #ffffff;
 `
 
 class Fingerboard extends Component {
@@ -30,6 +59,34 @@ class Fingerboard extends Component {
         })
   }
 
+  addLowString = () => {
+    this.setState(prevState => {
+      const tuning = prevState.tuning
+      const newStringTuning = tuning[0] - 5
+      return { tuning: [newStringTuning, ...tuning] }
+    })
+  }
+
+  removeLowString = () => {
+    this.setState(prevState => {
+      return { tuning: prevState.tuning.slice(1) }
+    })
+  }
+
+  addHighString = () => {
+    this.setState(prevState => {
+      const tuning = prevState.tuning
+      const newStringTuning = tuning[tuning.length - 1] + 5
+      return { tuning: tuning.concat(newStringTuning) }
+    })
+  }
+
+  removeHighString = () => {
+    this.setState(prevState => {
+      return { tuning: prevState.tuning.slice(0, -1) }
+    })
+  }
+
   render() {
     const strings = this.state.tuning.map(tuning => (
       <String
@@ -40,7 +97,20 @@ class Fingerboard extends Component {
         select={this.select}
       />
     ))
-    return <StyledFingerboard>{strings}</StyledFingerboard>
+
+    return (
+      <Wrapper>
+        <Buttons>
+          <Adder onClick={this.addLowString}>S+</Adder>
+          <Remover onClick={this.removeLowString}>S-</Remover>
+        </Buttons>
+        <StyledFingerboard>{strings}</StyledFingerboard>
+        <Buttons>
+          <Adder onClick={this.addHighString}>S+</Adder>
+          <Remover onClick={this.removeHighString}>S-</Remover>
+        </Buttons>
+      </Wrapper>
+    )
   }
 }
 

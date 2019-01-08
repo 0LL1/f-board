@@ -1,12 +1,12 @@
 add styling
 
-make add string and remove string functions
+add hover effects
+
+sharpen and flatten should change state in parent?
 
 add fret numbers?
 
 make fretCount responsive based on height
-
-add logo and favicon
 
 add sound?
 
