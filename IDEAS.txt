@@ -1,1 +1,13 @@
+add styling
 
+make add string and remove string functions
+
+add fret numbers?
+
+make fretCount responsive based on height
+
+add logo and favicon
+
+add sound?
+
+add toggle to switch to note relations based on root

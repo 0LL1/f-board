@@ -5,21 +5,8 @@ import * as Note from 'tonal-note'
 const StyledString = styled.div`
   display: flex;
   flex-direction: column;
-  .sharpen {
-    cursor: pointer;
-    height: 1.8rem;
-    background-color: #2ecc40;
-    font-size: 1rem;
-    color: white;
-  }
-  .flatten {
-    cursor: pointer;
-    height: 1.8rem;
-    background-color: #ff4136;
-    font-size: 1rem;
-    color: white;
-  }
 `
+
 const StyledNote = styled.div`
   cursor: pointer;
   width: 2.8rem;
@@ -37,8 +24,24 @@ const StyledNote = styled.div`
     background-color: #ffffff;
     color: #222222;
   }
-}
 `
+
+const Sharpen = styled.button`
+  cursor: pointer;
+  height: 1.8rem;
+  background-color: #2ecc40;
+  font-size: 1rem;
+  color: white;
+`
+
+const Flatten = styled.button`
+  cursor: pointer;
+  height: 1.8rem;
+  background-color: #ff4136;
+  font-size: 1rem;
+  color: white;
+`
+
 class String extends Component {
   state = {
     tuning: this.props.tuning,
@@ -57,8 +60,6 @@ class String extends Component {
     })
   }
 
-  selected = tone => this.props.selected.has(Note.pc(tone))
-
   render() {
     const frets = Array.from({ length: this.state.fretCount }, (v, i) => i)
     const tones = frets.map(fret =>
@@ -67,21 +68,16 @@ class String extends Component {
     const notes = tones.map(tone => (
       <StyledNote
         key={tone}
-        className={`fret ${Note.pc(tone)}`}
         onClick={() => this.props.select(tone)}
-        selected={this.selected(tone)}
+        selected={this.props.selected.has(Note.pc(tone))}
       >
         {Note.pc(tone)}
       </StyledNote>
     ))
     return (
       <StyledString>
-        <button className="sharpen" onClick={this.sharpen}>
-          +
-        </button>
-        <button className="flatten" onClick={this.flatten}>
-          -
-        </button>
+        <Sharpen onClick={this.sharpen}>+</Sharpen>
+        <Flatten onClick={this.flatten}>-</Flatten>
         <div>{notes}</div>
       </StyledString>
     )

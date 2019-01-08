@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import String from '../components/string'
 import styled from 'styled-components'
 import * as Note from 'tonal-note'
+import String from '../components/string'
 
 const StyledFingerboard = styled.div`
   display: flex;
