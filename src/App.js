@@ -8,7 +8,7 @@ const StyledApp = styled.div`
   align-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: #222222;
+  background-color: #111111;
 `
 
 const App = () => {

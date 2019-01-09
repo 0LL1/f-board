@@ -5,7 +5,6 @@ import String from '../components/string'
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
 `
 
 const StyledFingerboard = styled.div`
@@ -13,38 +12,89 @@ const StyledFingerboard = styled.div`
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: #333333;
 `
 const Buttons = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
+  margin: 0 0.5rem;
+`
+
+const InstrumentToggle = styled.button`
+  cursor: pointer;
+  grid-row-start: 4;
+  align-self: center;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 1px solid;
+  border-radius: 50%;
+  background-color: #ffffff;
+  font-size: 1.5rem;
+  color: #111111;
+`
+
+const AccidentalToggle = styled.button`
+  cursor: pointer;
+  grid-row-start: 4;
+  align-self: center;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  font-size: 1rem;
+  color: #111111;
 `
 
 const Adder = styled.button`
   cursor: pointer;
-  height: 2rem;
-  width: 2rem;
+  grid-row-start: 9;
+  align-self: center;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
   border-radius: 50%;
-  background-color: #2ecc40;
+  background-color: #3d9970;
   font-size: 1rem;
   color: #ffffff;
 `
 
 const Remover = styled.button`
   cursor: pointer;
-  height: 2rem;
-  width: 2rem;
+  grid-row-start: 10;
+  align-self: center;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
   border-radius: 50%;
   background-color: #ff4136;
   font-size: 1rem;
   color: #ffffff;
 `
 
+const FretCountChanger = styled.button`
+  cursor: pointer;
+  grid-row-start: 15;
+  align-self: center;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  font-size: 1.5rem;
+  color: #111111;
+`
+
+const guitar = [64, 69, 74, 79, 83, 88]
+const violin = [55, 62, 69, 76]
+
 class Fingerboard extends Component {
   state = {
-    tuning: [64, 69, 74, 79, 83, 88],
+    tuning: guitar,
     fretCount: 13,
-    selected: new Set()
+    selected: new Set(),
+    sharps: true
   }
 
   select = tone => {
@@ -52,11 +102,24 @@ class Fingerboard extends Component {
       ? this.setState(
           prevState => new Set(prevState.selected.add(Note.pc(tone)))
         )
-      : this.setState(prevState => {
-          prevState.selected.delete(Note.pc(tone))
-          new Set(prevState.selected)
-          this.forceUpdate()
-        })
+      : this.setState(
+          prevState => {
+            prevState.selected.delete(Note.pc(tone))
+            new Set(prevState.selected)
+          },
+          () => this.forceUpdate()
+        )
+  }
+
+  changeAccidentalType = () => {
+    this.setState(prevState => {
+      return { sharps: !prevState.sharps }
+    })
+  }
+
+  changeInstrument = () => {
+    const newTuning = this.state.tuning === guitar ? violin : guitar
+    this.setState({ tuning: newTuning })
   }
 
   addLowString = () => {
@@ -82,8 +145,23 @@ class Fingerboard extends Component {
   }
 
   removeHighString = () => {
+    this.setState(
+      prevState => {
+        return { tuning: prevState.tuning.slice(0, -1) }
+      },
+      () => this.forceUpdate()
+    )
+  }
+
+  addFret = () => {
     this.setState(prevState => {
-      return { tuning: prevState.tuning.slice(0, -1) }
+      return { fretCount: prevState.fretCount + 1 }
+    })
+  }
+
+  removeFret = () => {
+    this.setState(prevState => {
+      return { fretCount: prevState.fretCount - 1 }
     })
   }
 
@@ -95,19 +173,28 @@ class Fingerboard extends Component {
         fretCount={this.state.fretCount}
         selected={this.state.selected}
         select={this.select}
+        sharps={this.state.sharps}
       />
     ))
 
     return (
       <Wrapper>
         <Buttons>
+          <AccidentalToggle onClick={this.changeAccidentalType}>
+            {this.state.sharps ? 'b' : '#'}
+          </AccidentalToggle>
           <Adder onClick={this.addLowString}>S+</Adder>
           <Remover onClick={this.removeLowString}>S-</Remover>
+          <FretCountChanger onClick={this.removeFret}>&uarr;</FretCountChanger>
         </Buttons>
         <StyledFingerboard>{strings}</StyledFingerboard>
         <Buttons>
           <Adder onClick={this.addHighString}>S+</Adder>
           <Remover onClick={this.removeHighString}>S-</Remover>
+          <InstrumentToggle onClick={this.changeInstrument}>
+            {this.state.tuning === guitar ? '🎻' : '🎸'}
+          </InstrumentToggle>
+          <FretCountChanger onClick={this.addFret}>&darr;</FretCountChanger>
         </Buttons>
       </Wrapper>
     )

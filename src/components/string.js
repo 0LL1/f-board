@@ -12,30 +12,34 @@ const StyledNote = styled.div`
   width: 2.8rem;
   height: 2.8rem;
   border: none;
-  margin: 1px;
+  border-radius: ${props => props.selected && '50%'};
+  margin: 0;
   font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${props => (props.selected ? '#ffdc00' : '#222222')};
-  color: ${props => (props.selected ? '#222222' : '#ffffff')};
+  background-color: ${props => (props.selected ? '#FF851B' : '#333333')};
+  color: ${props => (props.selected ? '#111111' : '#ffffff')};
   :nth-child(1) {
     height: 1.8rem;
-    background-color: ${props => (props.selected ? '#ffdc00' : '#ffffff')};
-    color: #222222;
+    background-color: ${props => (props.selected ? '#FF851B' : '#ffffff')};
+    color: #111111;
+    border-radius: 0;
   }
 `
 
 const Sharpen = styled.button`
   cursor: pointer;
+  border: none;
   height: 1.8rem;
-  background-color: #2ecc40;
+  background-color: #3d9970;
   font-size: 1rem;
   color: white;
 `
 
 const Flatten = styled.button`
   cursor: pointer;
+  border: none;
   height: 1.8rem;
   background-color: #ff4136;
   font-size: 1rem;
@@ -44,8 +48,7 @@ const Flatten = styled.button`
 
 class String extends Component {
   state = {
-    tuning: this.props.tuning,
-    fretCount: this.props.fretCount
+    tuning: this.props.tuning
   }
 
   sharpen = () => {
@@ -61,9 +64,9 @@ class String extends Component {
   }
 
   render() {
-    const frets = Array.from({ length: this.state.fretCount }, (v, i) => i)
+    const frets = Array.from({ length: this.props.fretCount }, (v, i) => i)
     const tones = frets.map(fret =>
-      Note.fromMidi(Note.midi(this.state.tuning + fret))
+      Note.fromMidi(Note.midi(this.state.tuning + fret), this.props.sharps)
     )
     const notes = tones.map(tone => (
       <StyledNote

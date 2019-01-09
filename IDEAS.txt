@@ -1,12 +1,9 @@
 add styling
-
-add hover effects
+  highlighted notes lifts up with shadow, size and color
+  buttons get larger with hover
+  note highlights with hover
 
 sharpen and flatten should change state in parent?
-
-add fret numbers?
-
-make fretCount responsive based on height
 
 add sound?
 
