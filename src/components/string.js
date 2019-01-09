@@ -17,6 +17,7 @@ class String extends Component {
     const notes = tones.map((tone, index) => (
       <NotePosition
         key={index}
+        index={index}
         onClick={() => this.props.select(tone)}
         selected={this.props.selected.has(Note.pc(tone))}
       >

@@ -4,6 +4,7 @@ import * as Note from 'tonal-note'
 import String from './string'
 import {
   colors,
+  vars,
   Adder,
   Remover,
   FretCountChanger,
@@ -21,11 +22,12 @@ const StyledFingerboard = styled.div`
   align-content: center;
   justify-content: center;
   background-color: ${colors.grey};
+  box-shadow: ${vars.boxShadow};
 `
 const Buttons = styled.div`
   display: grid;
   grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
 `
 
 const guitar = [64, 69, 74, 79, 83, 88]
@@ -65,46 +67,52 @@ class Fingerboard extends Component {
   }
 
   addLowString = () => {
-    this.setState(prevState => {
-      const tuning = prevState.tuning
-      const newStringTuning = tuning[0] - 5
-      return { tuning: [newStringTuning, ...tuning] }
-    })
+    this.state.tuning.length < 8 &&
+      this.setState(prevState => {
+        const tuning = prevState.tuning
+        const newStringTuning = tuning[0] - 5
+        return { tuning: [newStringTuning, ...tuning] }
+      })
   }
 
   removeLowString = () => {
-    this.setState(prevState => {
-      return { tuning: prevState.tuning.slice(1) }
-    })
+    this.state.tuning.length > 4 &&
+      this.setState(prevState => {
+        return { tuning: prevState.tuning.slice(1) }
+      })
   }
 
   addHighString = () => {
-    this.setState(prevState => {
-      const tuning = prevState.tuning
-      const newStringTuning = tuning[tuning.length - 1] + 5
-      return { tuning: tuning.concat(newStringTuning) }
-    })
+    this.state.tuning.length < 8 &&
+      this.setState(prevState => {
+        const tuning = prevState.tuning
+        const newStringTuning = tuning[tuning.length - 1] + 5
+        return { tuning: tuning.concat(newStringTuning) }
+      })
   }
 
   removeHighString = () => {
-    this.setState(
-      prevState => {
-        return { tuning: prevState.tuning.slice(0, -1) }
-      },
-      () => this.forceUpdate()
-    )
+    this.state.tuning.length > 4 &&
+      this.setState(
+        prevState => {
+          return { tuning: prevState.tuning.slice(0, -1) }
+        },
+        () => this.forceUpdate()
+      )
   }
 
   addFret = () => {
-    this.setState(prevState => {
-      return { fretCount: prevState.fretCount + 1 }
-    })
+    this.state.fretCount < 18 &&
+      this.setState(prevState => {
+        return { fretCount: prevState.fretCount + 1 }
+      })
   }
 
   removeFret = () => {
-    this.setState(prevState => {
-      return { fretCount: prevState.fretCount - 1 }
-    })
+    this.state.fretCount > 12 &&
+      this.setState(prevState => {
+        return { fretCount: prevState.fretCount - 1 }
+      })
   }
 
   sharpen = index => {

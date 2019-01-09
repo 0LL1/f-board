@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Fingerboard from './components/fingerboard'
+import { colors, Globalstyle } from './components/styles'
 
 const StyledApp = styled.div`
   display: grid;
@@ -8,12 +9,12 @@ const StyledApp = styled.div`
   align-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: #111111;
 `
 
 const App = () => {
   return (
     <StyledApp>
+      <Globalstyle />
       <Fingerboard />
     </StyledApp>
   )
