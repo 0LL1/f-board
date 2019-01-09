@@ -1,7 +1,7 @@
 add styling
-  highlighted notes lifts up with shadow, size and color
+  highlighted notes lifts up with shadow, size and color (same as hover)
   buttons get larger with hover
-  note highlights with hover
+  note highlights with hover (color)
 
 sharpen and flatten should change state in parent?
 

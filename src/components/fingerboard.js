@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import * as Note from 'tonal-note'
-import String from '../components/string'
+import String from './string'
+import {
+  colors,
+  Adder,
+  Remover,
+  FretCountChanger,
+  InstrumentToggle,
+  AccidentalToggle
+} from './styles'
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,78 +20,12 @@ const StyledFingerboard = styled.div`
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  background-color: #333333;
+  background-color: ${colors.grey};
 `
 const Buttons = styled.div`
   display: grid;
   grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
   margin: 0 0.5rem;
-`
-
-const InstrumentToggle = styled.button`
-  cursor: pointer;
-  grid-row-start: 4;
-  align-self: center;
-  border: none;
-  height: 2.5rem;
-  width: 2.5rem;
-  border: 1px solid;
-  border-radius: 50%;
-  background-color: #ffffff;
-  font-size: 1.5rem;
-  color: #111111;
-`
-
-const AccidentalToggle = styled.button`
-  cursor: pointer;
-  grid-row-start: 4;
-  align-self: center;
-  border: none;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  background-color: #ffffff;
-  font-size: 1rem;
-  color: #111111;
-`
-
-const Adder = styled.button`
-  cursor: pointer;
-  grid-row-start: 9;
-  align-self: center;
-  border: none;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  background-color: #3d9970;
-  font-size: 1rem;
-  color: #ffffff;
-`
-
-const Remover = styled.button`
-  cursor: pointer;
-  grid-row-start: 10;
-  align-self: center;
-  border: none;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  background-color: #ff4136;
-  font-size: 1rem;
-  color: #ffffff;
-`
-
-const FretCountChanger = styled.button`
-  cursor: pointer;
-  grid-row-start: 15;
-  align-self: center;
-  border: none;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  background-color: #ffffff;
-  font-size: 1.5rem;
-  color: #111111;
 `
 
 const guitar = [64, 69, 74, 79, 83, 88]
@@ -183,14 +125,14 @@ class Fingerboard extends Component {
           <AccidentalToggle onClick={this.changeAccidentalType}>
             {this.state.sharps ? 'b' : '#'}
           </AccidentalToggle>
-          <Adder onClick={this.addLowString}>S+</Adder>
-          <Remover onClick={this.removeLowString}>S-</Remover>
+          <Adder onClick={this.addLowString}>&#43;</Adder>
+          <Remover onClick={this.removeLowString}>&minus;</Remover>
           <FretCountChanger onClick={this.removeFret}>&uarr;</FretCountChanger>
         </Buttons>
         <StyledFingerboard>{strings}</StyledFingerboard>
         <Buttons>
-          <Adder onClick={this.addHighString}>S+</Adder>
-          <Remover onClick={this.removeHighString}>S-</Remover>
+          <Adder onClick={this.addHighString}>&#43;</Adder>
+          <Remover onClick={this.removeHighString}>&minus;</Remover>
           <InstrumentToggle onClick={this.changeInstrument}>
             {this.state.tuning === guitar ? '🎻' : '🎸'}
           </InstrumentToggle>

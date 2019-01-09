@@ -1,49 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import * as Note from 'tonal-note'
+import { Sharpen, Flatten, NotePosition } from './styles'
 
 const StyledString = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const StyledNote = styled.div`
-  cursor: pointer;
-  width: 2.8rem;
-  height: 2.8rem;
-  border: none;
-  border-radius: ${props => props.selected && '50%'};
-  margin: 0;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${props => (props.selected ? '#FF851B' : '#333333')};
-  color: ${props => (props.selected ? '#111111' : '#ffffff')};
-  :nth-child(1) {
-    height: 1.8rem;
-    background-color: ${props => (props.selected ? '#FF851B' : '#ffffff')};
-    color: #111111;
-    border-radius: 0;
-  }
-`
-
-const Sharpen = styled.button`
-  cursor: pointer;
-  border: none;
-  height: 1.8rem;
-  background-color: #3d9970;
-  font-size: 1rem;
-  color: white;
-`
-
-const Flatten = styled.button`
-  cursor: pointer;
-  border: none;
-  height: 1.8rem;
-  background-color: #ff4136;
-  font-size: 1rem;
-  color: white;
 `
 
 class String extends Component {
@@ -69,18 +31,18 @@ class String extends Component {
       Note.fromMidi(Note.midi(this.state.tuning + fret), this.props.sharps)
     )
     const notes = tones.map(tone => (
-      <StyledNote
+      <NotePosition
         key={tone}
         onClick={() => this.props.select(tone)}
         selected={this.props.selected.has(Note.pc(tone))}
       >
         {Note.pc(tone)}
-      </StyledNote>
+      </NotePosition>
     ))
     return (
       <StyledString>
-        <Sharpen onClick={this.sharpen}>P+</Sharpen>
-        <Flatten onClick={this.flatten}>P-</Flatten>
+        <Sharpen onClick={this.sharpen}>&#43;</Sharpen>
+        <Flatten onClick={this.flatten}>&minus;</Flatten>
         <div>{notes}</div>
       </StyledString>
     )
