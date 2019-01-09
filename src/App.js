@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Fingerboard from './components/fingerboard'
-import { colors, Globalstyle } from './components/styles'
+import { Globalstyle } from './components/styles'
 
 const StyledApp = styled.div`
   display: grid;

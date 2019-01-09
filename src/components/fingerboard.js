@@ -42,13 +42,13 @@ class Fingerboard extends Component {
   }
 
   select = tone => {
-    !this.state.selected.has(Note.pc(tone))
+    !this.state.selected.has(Note.chroma(tone))
       ? this.setState(
-          prevState => new Set(prevState.selected.add(Note.pc(tone)))
+          prevState => new Set(prevState.selected.add(Note.chroma(tone)))
         )
       : this.setState(
           prevState => {
-            prevState.selected.delete(Note.pc(tone))
+            prevState.selected.delete(Note.chroma(tone))
             new Set(prevState.selected)
           },
           () => this.forceUpdate()

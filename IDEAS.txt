@@ -4,9 +4,6 @@ add toggle to switch to note relations based on root?
 
 draw the string lines
 
-fix accidentaltoggle behavior
-  how?
-
 fix fretcountchange behavior
   set minimun and maximum fretcount
 

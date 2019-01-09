@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 const colors = {
   light: '#ffffff',
   dark: '#111111',
-  grey: '#333333',
+  grey: '#444444',
   plus: '#3d9970',
   plusdark: '#2d7254',
   minus: '#ff4136',
@@ -32,6 +32,7 @@ const Globalstyle = createGlobalStyle`
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
   user-select: none;
+  cursor: default;
   background: linear-gradient(to right bottom, #ff851b, #ee6c10, #dd5206, #cb3501, #b90a00);
 }
 button:focus {
@@ -41,7 +42,6 @@ button:focus {
 
 //Components
 const BaseButton = styled.button`
-  cursor: pointer;
   align-self: center;
   border: none;
   border-radius: 50%;
@@ -96,7 +96,6 @@ const Flatten = styled(Sharpen)`
   }
 `
 const NotePosition = styled.div`
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

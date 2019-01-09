@@ -19,7 +19,7 @@ class String extends Component {
         key={index}
         index={index}
         onClick={() => this.props.select(tone)}
-        selected={this.props.selected.has(Note.pc(tone))}
+        selected={this.props.selected.has(Note.chroma(tone))}
       >
         {Note.pc(tone)}
       </NotePosition>
