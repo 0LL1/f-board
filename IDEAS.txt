@@ -3,8 +3,6 @@ add styling
   buttons get larger with hover
   note highlights with hover (color)
 
-sharpen and flatten should change state in parent?
-
 add sound?
 
 add toggle to switch to note relations based on root

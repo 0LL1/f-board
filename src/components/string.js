@@ -9,30 +9,14 @@ const StyledString = styled.div`
 `
 
 class String extends Component {
-  state = {
-    tuning: this.props.tuning
-  }
-
-  sharpen = () => {
-    this.setState(prevState => {
-      return { tuning: prevState.tuning + 1 }
-    })
-  }
-
-  flatten = () => {
-    this.setState(prevState => {
-      return { tuning: prevState.tuning - 1 }
-    })
-  }
-
   render() {
     const frets = Array.from({ length: this.props.fretCount }, (v, i) => i)
     const tones = frets.map(fret =>
-      Note.fromMidi(Note.midi(this.state.tuning + fret), this.props.sharps)
+      Note.fromMidi(Note.midi(this.props.tuning + fret), this.props.sharps)
     )
-    const notes = tones.map(tone => (
+    const notes = tones.map((tone, index) => (
       <NotePosition
-        key={tone}
+        key={index}
         onClick={() => this.props.select(tone)}
         selected={this.props.selected.has(Note.pc(tone))}
       >
@@ -41,8 +25,12 @@ class String extends Component {
     ))
     return (
       <StyledString>
-        <Sharpen onClick={this.sharpen}>&#43;</Sharpen>
-        <Flatten onClick={this.flatten}>&minus;</Flatten>
+        <Sharpen onClick={() => this.props.sharpen(this.props.index)}>
+          &#43;
+        </Sharpen>
+        <Flatten onClick={() => this.props.flatten(this.props.index)}>
+          &minus;
+        </Flatten>
         <div>{notes}</div>
       </StyledString>
     )

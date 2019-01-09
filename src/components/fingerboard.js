@@ -107,15 +107,30 @@ class Fingerboard extends Component {
     })
   }
 
+  sharpen = index => {
+    const newTuning = [...this.state.tuning]
+    newTuning[index]++
+    this.setState({ tuning: newTuning })
+  }
+
+  flatten = index => {
+    const newTuning = [...this.state.tuning]
+    newTuning[index]--
+    this.setState({ tuning: newTuning })
+  }
+
   render() {
-    const strings = this.state.tuning.map(tuning => (
+    const strings = this.state.tuning.map((tuning, index) => (
       <String
-        key={tuning}
+        key={index}
+        index={index}
         tuning={tuning}
         fretCount={this.state.fretCount}
         selected={this.state.selected}
-        select={this.select}
         sharps={this.state.sharps}
+        select={this.select}
+        sharpen={this.sharpen}
+        flatten={this.flatten}
       />
     ))
 
