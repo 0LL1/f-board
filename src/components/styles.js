@@ -17,7 +17,7 @@ const vars = {
   boxShadow: '5px 5px 50px 0 rgba(0, 0, 0, 0.5)'
 }
 
-//Global style
+// Global style
 const Globalstyle = createGlobalStyle`
   html {
     background-color: ${colors.dark}
@@ -30,7 +30,7 @@ const Globalstyle = createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #ffffff;
+  color: ${colors.light};
   user-select: none;
   cursor: default;
   background: linear-gradient(to right bottom, #ff851b, #ee6c10, #dd5206, #cb3501, #b90a00);
@@ -40,7 +40,37 @@ button:focus {
 }
 `
 
-//Components
+// Layout containers/wrappers
+const StyledApp = styled.div`
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  width: 100vw;
+`
+const Wrapper = styled.div`
+  display: flex;
+`
+
+const StyledFingerboard = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  background-color: ${colors.grey};
+  box-shadow: ${vars.boxShadow};
+`
+const Buttons = styled.div`
+  display: grid;
+  grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
+  margin: 0 0.3rem;
+`
+const StyledString = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+// Components
 const BaseButton = styled.button`
   align-self: center;
   border: none;
@@ -50,7 +80,7 @@ const BaseButton = styled.button`
   font-size: 1rem;
   box-shadow: ${vars.boxShadow};
   :hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
   }
 `
 const Adder = styled(BaseButton)`
@@ -110,10 +140,16 @@ const NotePosition = styled.div`
   margin: 0;
   font-size: ${props => (props.selected ? '1.4rem' : '1rem')};
   color: ${props => (props.selected ? colors.highlight : colors.dark)};
+  svg {
+    position: absolute;
+  }
   :nth-child(1) {
     height: 1.8rem;
-    background-color: ${colors.light}
+    background-color: ${colors.light};
     border-radius: 0;
+    svg {
+      display: none;
+    }
   }
   :hover {
     color: ${colors.highlight};
@@ -125,6 +161,11 @@ export {
   colors,
   vars,
   Globalstyle,
+  StyledApp,
+  Wrapper,
+  StyledFingerboard,
+  Buttons,
+  StyledString,
   BaseButton,
   Adder,
   Remover,

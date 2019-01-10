@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import * as Note from 'tonal-note'
 import String from './string'
 import {
-  colors,
-  vars,
+  Wrapper,
+  StyledFingerboard,
+  Buttons,
   Adder,
   Remover,
   FretCountChanger,
@@ -13,24 +13,7 @@ import {
   SoundToggle
 } from './styles'
 
-const Wrapper = styled.div`
-  display: flex;
-`
-
-const StyledFingerboard = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  background-color: ${colors.grey};
-  box-shadow: ${vars.boxShadow};
-`
-const Buttons = styled.div`
-  display: grid;
-  grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
-  margin: 0 0.3rem;
-`
-
+// Tuning templates
 const guitar = [40, 45, 50, 55, 59, 64]
 const violin = [55, 62, 69, 76]
 
