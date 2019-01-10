@@ -72,10 +72,14 @@ const FretCountChanger = styled(BaseButton)`
 const InstrumentToggle = styled(FretCountChanger)`
   grid-row-start: 4;
 `
-const AccidentalToggle = styled(BaseButton)`
-  grid-row-start: 4;
-  background-color: ${colors.light};
-  color: ${colors.dark};
+const AccidentalToggle = styled(InstrumentToggle)`
+  font-size: 1rem;
+`
+const SoundToggle = styled(BaseButton)`
+  grid-row-start: 1;
+  background-color: #00000000;
+  box-shadow: none;
+  font-size: 1.5rem;
 `
 const Sharpen = styled(BaseButton)`
   height: 1.8rem;
@@ -127,6 +131,7 @@ export {
   FretCountChanger,
   InstrumentToggle,
   AccidentalToggle,
+  SoundToggle,
   Sharpen,
   Flatten,
   NotePosition

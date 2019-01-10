@@ -9,6 +9,19 @@ const StyledString = styled.div`
 `
 
 class String extends Component {
+  playSound = tone => {
+    const audioCtx = new AudioContext()
+    const oscillator = audioCtx.createOscillator()
+    const gainNode = audioCtx.createGain()
+    gainNode.gain.value = 0.5
+    oscillator.connect(gainNode)
+    gainNode.connect(audioCtx.destination)
+    oscillator.type = 'triangle'
+    oscillator.frequency.value = Note.freq(tone)
+    oscillator.start()
+    oscillator.stop(audioCtx.currentTime + 0.4)
+  }
+
   render() {
     const frets = Array.from({ length: this.props.fretCount }, (v, i) => i)
     const tones = frets.map(fret =>
@@ -17,8 +30,10 @@ class String extends Component {
     const notes = tones.map((tone, index) => (
       <NotePosition
         key={index}
-        index={index}
-        onClick={() => this.props.select(tone)}
+        onClick={() => {
+          this.props.select(tone)
+          this.props.sound && this.playSound(tone)
+        }}
         selected={this.props.selected.has(Note.chroma(tone))}
       >
         {Note.pc(tone)}

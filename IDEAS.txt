@@ -1,10 +1,7 @@
-add sound?
-
 add toggle to switch to note relations based on root?
 
 draw the string lines
 
-fix fretcountchange behavior
-  set minimun and maximum fretcount
-
 keep buttons in place when fretcount changes?
+
+think about moving layout styles to styles.js and cleaning them up

@@ -9,7 +9,8 @@ import {
   Remover,
   FretCountChanger,
   InstrumentToggle,
-  AccidentalToggle
+  AccidentalToggle,
+  SoundToggle
 } from './styles'
 
 const Wrapper = styled.div`
@@ -30,7 +31,7 @@ const Buttons = styled.div`
   margin: 0 0.3rem;
 `
 
-const guitar = [64, 69, 74, 79, 83, 88]
+const guitar = [40, 45, 50, 55, 59, 64]
 const violin = [55, 62, 69, 76]
 
 class Fingerboard extends Component {
@@ -38,7 +39,8 @@ class Fingerboard extends Component {
     tuning: guitar,
     fretCount: 13,
     selected: new Set(),
-    sharps: true
+    sharps: true,
+    sound: true
   }
 
   select = tone => {
@@ -64,6 +66,12 @@ class Fingerboard extends Component {
   changeInstrument = () => {
     const newTuning = this.state.tuning === guitar ? violin : guitar
     this.setState({ tuning: newTuning })
+  }
+
+  toggleSound = () => {
+    this.setState(prevState => {
+      return { sound: !prevState.sound }
+    })
   }
 
   addLowString = () => {
@@ -136,6 +144,7 @@ class Fingerboard extends Component {
         fretCount={this.state.fretCount}
         selected={this.state.selected}
         sharps={this.state.sharps}
+        sound={this.state.sound}
         select={this.select}
         sharpen={this.sharpen}
         flatten={this.flatten}
@@ -154,11 +163,14 @@ class Fingerboard extends Component {
         </Buttons>
         <StyledFingerboard>{strings}</StyledFingerboard>
         <Buttons>
-          <Adder onClick={this.addHighString}>&#43;</Adder>
-          <Remover onClick={this.removeHighString}>&minus;</Remover>
+          <SoundToggle onClick={this.toggleSound}>
+            {this.state.sound ? '🔇' : '🔊'}
+          </SoundToggle>
           <InstrumentToggle onClick={this.changeInstrument}>
             {this.state.tuning === guitar ? '🎻' : '🎸'}
           </InstrumentToggle>
+          <Adder onClick={this.addHighString}>&#43;</Adder>
+          <Remover onClick={this.removeHighString}>&minus;</Remover>
           <FretCountChanger onClick={this.addFret}>&darr;</FretCountChanger>
         </Buttons>
       </Wrapper>
