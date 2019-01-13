@@ -1,5 +1,7 @@
-add responsiveness to layout
+do menu component
+
+style everything
+
+update the docs and configs
 
 add toggle to switch to note relations based on root?
-
-keep buttons in place when fretcount changes?

@@ -9,137 +9,124 @@ const colors = {
   plusdark: '#2d7254',
   minus: '#ff4136',
   minusdark: '#b90a00',
-  highlight: '#FF851B',
-  background: '#FF851B'
+  highlight: '#FF851B'
 }
 
 const vars = {
-  boxShadow: '5px 5px 50px 0 rgba(0, 0, 0, 0.5)'
+  smallBoxShadow: '0px 5px 10px 0 rgba(0, 0, 0, 0.3)',
+  bigBoxShadow: '0px 5px 20px 0 rgba(0, 0, 0, 0.3)',
+  transition: 'all 0.125s ease-in-out'
 }
 
 // Global style
-const Globalstyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   html {
-    background-color: ${colors.dark}
+    background-color: ${colors.light};
+    font-size: 16px;
   }
   body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    display: grid;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: ${colors.light};
-  user-select: none;
-  cursor: default;
-  background: linear-gradient(to right bottom, #ff851b, #ee6c10, #dd5206, #cb3501, #b90a00);
-}
-button:focus {
-  outline: none;
-}
-`
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: ${colors.dark};
+    user-select: none;
+    cursor: default;
+  }
+  button:focus {
+    outline: none;
+  }
+  `
 
 // Layout containers/wrappers
 const StyledApp = styled.div`
   display: grid;
   justify-content: center;
   align-content: center;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  background-color: ${colors.light};
+  background-size: 100%;
 `
-const Wrapper = styled.div`
-  display: flex;
-`
-
 const StyledFingerboard = styled.div`
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: center;
   background-color: ${colors.grey};
-  box-shadow: ${vars.boxShadow};
-`
-const Buttons = styled.div`
-  display: grid;
-  grid-template-rows: repeat(3, 1.8rem) repeat(12, 1fr);
-  margin: 0 0.3rem;
+  box-shadow: ${vars.smallBoxShadow};
 `
 const StyledString = styled.div`
   display: flex;
   flex-direction: column;
 `
+const StyledNav = styled.div`
+  display: flex;
+  width: 19.2rem;
+  height: 2.4rem;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: calc(50% - 9.6rem);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: ${colors.light};
+  color: ${colors.dark};
+  box-shadow: ${vars.bigBoxShadow};
+`
+const StyledMenu = styled.div``
 
 // Components
 const BaseButton = styled.button`
-  align-self: center;
   border: none;
-  border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
-  font-size: 1rem;
-  box-shadow: ${vars.boxShadow};
-  :hover {
-    transform: scale(1.5);
-  }
-`
-const Adder = styled(BaseButton)`
-  grid-row-start: 9;
-  background-color: ${colors.plus};
-  color: ${colors.light};
-`
-const Remover = styled(BaseButton)`
-  grid-row-start: 10;
-  background-color: ${colors.minus};
-  color: ${colors.light};
-`
-const FretCountChanger = styled(BaseButton)`
-  grid-row-start: 15;
-  background-color: ${colors.light};
-  color: ${colors.dark};
-  font-size: 1.5rem;
-`
-const InstrumentToggle = styled(FretCountChanger)`
-  grid-row-start: 4;
-`
-const AccidentalToggle = styled(InstrumentToggle)`
-  font-size: 1rem;
-`
-const SoundToggle = styled(BaseButton)`
-  grid-row-start: 1;
+  width: 3.2rem;
+  font-size: 1.2rem;
   background-color: #00000000;
-  box-shadow: none;
-  font-size: 1.5rem;
-`
+  /* box-shadow: ${vars.boxShadow}; */
+  transition: ${vars.transition};
+  .icon {
+    vertical-align: middle;
+  }
+  :hover {
+    /* transform: scale(1.1); */
+  }
+  `
+const Menu = styled(BaseButton)``
+const Adder = styled(BaseButton)``
+const Remover = styled(BaseButton)``
+const InstrumentToggle = styled(BaseButton)``
+const AccidentalToggle = styled(BaseButton)``
+const SoundToggle = styled(BaseButton)``
 const Sharpen = styled(BaseButton)`
   height: 1.8rem;
   width: 100%;
-  border-radius: 0;
-  box-shadow: none;
-  background-color: ${colors.plus};
-  color: ${colors.light};
-  :hover {
+  background-color: ${colors.light};
+  color: ${colors.dark};
+  /* :hover {
     transform: none;
-    background-color: ${colors.plusdark};
-  }
+    background-color: ${colors.plus};
+  } */
 `
 const Flatten = styled(Sharpen)`
-  background-color: ${colors.minus};
-  :hover {
-    background-color: ${colors.minusdark};
-  }
+  /* :hover {
+    background-color: ${colors.minus};
+  } */
 `
 const NotePosition = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border: none;
   border-radius: ${props => props.selected && '50%'};
   margin: 0;
   font-size: ${props => (props.selected ? '1.4rem' : '1rem')};
   color: ${props => (props.selected ? colors.highlight : colors.dark)};
+  transition: ${vars.transition};
   svg {
     position: absolute;
   }
@@ -160,16 +147,16 @@ const NotePosition = styled.div`
 export {
   colors,
   vars,
-  Globalstyle,
+  GlobalStyle,
   StyledApp,
-  Wrapper,
   StyledFingerboard,
-  Buttons,
   StyledString,
+  StyledNav,
+  StyledMenu,
   BaseButton,
+  Menu,
   Adder,
   Remover,
-  FretCountChanger,
   InstrumentToggle,
   AccidentalToggle,
   SoundToggle,
