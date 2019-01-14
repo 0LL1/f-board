@@ -34,7 +34,7 @@ const String = ({
           y1="0rem"
           x2="1.2rem"
           y2="0.6rem"
-          stroke={colors.dark}
+          stroke={colors.grey}
           strokeWidth="0.1rem"
         />
         <line
@@ -42,7 +42,7 @@ const String = ({
           y1="1.8rem"
           x2="1.2rem"
           y2="2.4rem"
-          stroke={colors.dark}
+          stroke={colors.grey}
           strokeWidth="0.1rem"
         />
       </svg>

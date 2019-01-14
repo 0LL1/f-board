@@ -1,27 +1,26 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
 // Variables
-const colors = {
+export const colors = {
   light: '#ffffff',
-  dark: '#111111',
-  grey: '#444444',
-  plus: '#3d9970',
-  plusdark: '#2d7254',
-  minus: '#ff4136',
-  minusdark: '#b90a00',
-  highlight: '#FF851B'
+  dark: '#333333',
+  grey: '#888888',
+  highlight: '#FF851B',
+  lighter: '#ffd268',
+  transparent: '#00000000'
 }
 
-const vars = {
+export const vars = {
+  length: '2.4rem',
   smallBoxShadow: '0px 5px 10px 0 rgba(0, 0, 0, 0.3)',
   bigBoxShadow: '0px 5px 20px 0 rgba(0, 0, 0, 0.3)',
-  transition: 'all 0.125s ease-in-out'
+  transition: 'all 0.175s ease-in-out'
 }
 
 // Global style
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   html {
-    background-color: ${colors.light};
+    background-color: ${colors.lighter};
     font-size: 16px;
   }
   body {
@@ -40,100 +39,53 @@ const GlobalStyle = createGlobalStyle`
   button:focus {
     outline: none;
   }
-  `
+  .icon {
+    vertical-align: middle;
+  }
+`
 
-// Layout containers/wrappers
-const StyledApp = styled.div`
+//Components
+export const StyledApp = styled.div`
   display: grid;
   justify-content: center;
   align-content: center;
   min-height: 100vh;
-  background-color: ${colors.light};
+  background-color: ${colors.lighter};
   background-size: 100%;
 `
-const StyledFingerboard = styled.div`
+
+export const StyledFingerboard = styled.div`
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  background-color: ${colors.grey};
+  background-color: ${colors.dark};
   box-shadow: ${vars.smallBoxShadow};
 `
-const StyledString = styled.div`
+
+export const StyledString = styled.div`
   display: flex;
   flex-direction: column;
 `
-const StyledNav = styled.div`
-  display: flex;
-  width: 19.2rem;
-  height: 2.4rem;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 0;
-  left: calc(50% - 9.6rem);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background-color: ${colors.light};
-  color: ${colors.dark};
-  box-shadow: ${vars.bigBoxShadow};
-`
-const StyledMenu = styled.div``
 
-// Components
-const BaseButton = styled.button`
-  border: none;
-  width: 3.2rem;
-  font-size: 1.2rem;
-  background-color: #00000000;
-  /* box-shadow: ${vars.boxShadow}; */
-  transition: ${vars.transition};
-  .icon {
-    vertical-align: middle;
-  }
-  :hover {
-    /* transform: scale(1.1); */
-  }
-  `
-const Menu = styled(BaseButton)``
-const Adder = styled(BaseButton)``
-const Remover = styled(BaseButton)``
-const InstrumentToggle = styled(BaseButton)``
-const AccidentalToggle = styled(BaseButton)``
-const SoundToggle = styled(BaseButton)``
-const Sharpen = styled(BaseButton)`
-  height: 1.8rem;
-  width: 100%;
-  background-color: ${colors.light};
-  color: ${colors.dark};
-  /* :hover {
-    transform: none;
-    background-color: ${colors.plus};
-  } */
-`
-const Flatten = styled(Sharpen)`
-  /* :hover {
-    background-color: ${colors.minus};
-  } */
-`
-const NotePosition = styled.div`
+export const NotePosition = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: ${vars.length};
+  height: ${vars.length};
   border: none;
-  border-radius: ${props => props.selected && '50%'};
-  margin: 0;
   font-size: ${props => (props.selected ? '1.4rem' : '1rem')};
-  color: ${props => (props.selected ? colors.highlight : colors.dark)};
+  color: ${props => (props.selected ? colors.highlight : colors.grey)};
   transition: ${vars.transition};
   svg {
     position: absolute;
   }
   :nth-child(1) {
-    height: 1.8rem;
-    background-color: ${colors.light};
-    border-radius: 0;
+    height: calc(3 / 4 * ${vars.length});
+    background-color: ${colors.dark};
+    border-bottom: 0.1rem solid;
+    border-color: ${colors.grey};
     svg {
       display: none;
     }
@@ -144,23 +96,65 @@ const NotePosition = styled.div`
   }
 `
 
-export {
-  colors,
-  vars,
-  GlobalStyle,
-  StyledApp,
-  StyledFingerboard,
-  StyledString,
-  StyledNav,
-  StyledMenu,
-  BaseButton,
-  Menu,
-  Adder,
-  Remover,
-  InstrumentToggle,
-  AccidentalToggle,
-  SoundToggle,
-  Sharpen,
-  Flatten,
-  NotePosition
-}
+export const StyledNav = styled.div`
+  display: flex;
+  width: calc(8 * ${vars.length});
+  height: ${vars.length};
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: calc(50% - 4 * ${vars.length});
+  border-radius: 10px 10px 0 0;
+  background-color: ${colors.light};
+  color: ${colors.dark};
+  box-shadow: ${vars.bigBoxShadow};
+`
+
+export const StyledMenu = styled.div`
+  position: fixed;
+  width: calc(8 / 5 * ${vars.length});
+  bottom: ${vars.length};
+  left: calc(50% - 8 / 5 / 2 * ${vars.length});
+`
+
+export const BaseButton = styled.button`
+  border: none;
+  width: 100%;
+  background-color: ${colors.transparent};
+  font-size: 1.2rem;
+  transition: ${vars.transition};
+  :hover {
+    color: ${colors.highlight};
+  }
+`
+
+export const MenuIcon = styled(BaseButton)`
+  background-color: ${colors.light};
+  display: block;
+  height: ${vars.length};
+`
+
+export const Adder = styled(BaseButton)``
+
+export const Remover = styled(BaseButton)``
+
+export const SoundToggle = styled(MenuIcon)`
+  border-radius: 10px 10px 0 0;
+`
+
+export const AccidentalToggle = styled(MenuIcon)`
+  border-bottom: 0.1rem solid;
+  border-color: ${colors.grey};
+`
+
+export const Instrument = styled(MenuIcon)``
+
+export const Sharpen = styled(BaseButton)`
+  background-color: ${colors.light};
+  height: calc(3 / 4 * ${vars.length});
+`
+
+export const Flatten = styled(BaseButton)`
+  background-color: ${colors.light};
+  height: calc(3 / 4 * ${vars.length});
+`

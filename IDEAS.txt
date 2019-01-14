@@ -1,7 +1,3 @@
-do menu component
-
-style everything
-
 update the docs and configs
 
 add toggle to switch to note relations based on root?

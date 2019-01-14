@@ -1,10 +1,9 @@
 import React from 'react'
 import Menu from './menu'
-import { FiChevronLeft, FiChevronRight, FiMenu } from 'react-icons/fi'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { StyledNav, Adder, Remover } from './styles'
 
 const Nav = ({
-  instrument,
   sharps,
   sound,
   menuOpen,
@@ -26,17 +25,14 @@ const Nav = ({
         <FiChevronRight className="icon" />
       </Remover>
       <Menu
-        onClick={openMenu}
-        instrument={instrument}
         sharps={sharps}
         sound={sound}
         menuOpen={menuOpen}
+        openMenu={openMenu}
         toggleSound={toggleSound}
         changeAccidentalType={changeAccidentalType}
         changeInstrument={changeInstrument}
-      >
-        <FiMenu className="icon" />
-      </Menu>
+      />
       <Remover onClick={removeHighString}>
         <FiChevronLeft className="icon" />
       </Remover>

@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import * as Note from 'tonal-note'
 import Fingerboard from './components/fingerboard'
 import Nav from './components/nav'
-import { guitar, violin } from './components/instruments'
+import { instruments } from './components/instruments'
 import { GlobalStyle, StyledApp } from './components/styles'
 
 class App extends Component {
   state = {
-    instrument: guitar,
+    instrument: instruments.guitar,
     fretCount: 26,
     selected: new Set(),
     sharps: true,
@@ -48,9 +48,8 @@ class App extends Component {
     })
   }
 
-  changeInstrument = () => {
-    const newInstrument = this.state.instrument === guitar ? violin : guitar
-    this.setState({ instrument: newInstrument })
+  changeInstrument = instrument => {
+    this.setState({ instrument: instrument })
   }
 
   toggleSound = () => {
@@ -86,12 +85,9 @@ class App extends Component {
 
   removeHighString = () => {
     this.state.instrument.length > 4 &&
-      this.setState(
-        prevState => {
-          return { instrument: prevState.instrument.slice(0, -1) }
-        },
-        () => this.forceUpdate()
-      )
+      this.setState(prevState => {
+        return { instrument: prevState.instrument.slice(0, -1) }
+      })
   }
 
   sharpen = index => {
@@ -128,7 +124,6 @@ class App extends Component {
           flatten={this.flatten}
         />
         <Nav
-          instrument={this.state.instrument}
           sharps={this.state.sharps}
           sound={this.state.sound}
           menuOpen={this.state.menuOpen}
