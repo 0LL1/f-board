@@ -4,7 +4,7 @@ import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi'
 import { instruments } from './instruments'
 import {
   StyledMenu,
-  MenuIcon,
+  MenuItem,
   SoundToggle,
   AccidentalToggle,
   Instrument
@@ -30,9 +30,9 @@ const Menu = ({
 
   return (
     <>
-      <MenuIcon onClick={openMenu}>
+      <MenuItem onClick={openMenu}>
         {menuOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
-      </MenuIcon>
+      </MenuItem>
       <StyledMenu>
         <Transition
           native

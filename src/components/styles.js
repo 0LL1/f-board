@@ -12,9 +12,10 @@ export const colors = {
 
 export const vars = {
   length: '2.4rem',
-  smallBoxShadow: '0px 5px 10px 0 rgba(0, 0, 0, 0.3)',
-  bigBoxShadow: '0px 5px 20px 0 rgba(0, 0, 0, 0.3)',
-  transition: 'all 0.175s ease-in-out'
+  smallBoxShadow: '0px 5px 100px 0 rgba(0, 0, 0, 0.9)',
+  bigBoxShadow: '0px 5px 200px 0 rgba(0, 0, 0, 0.9)',
+  transition: 'all 0.175s ease-in-out',
+  borderRadius: '0.75rem 0.75rem 0 0'
 }
 
 // Global style
@@ -104,7 +105,7 @@ export const StyledNav = styled.div`
   position: fixed;
   bottom: 0;
   left: calc(50% - 4 * ${vars.length});
-  border-radius: 10px 10px 0 0;
+  border-radius: ${vars.borderRadius};
   background-color: ${colors.light};
   color: ${colors.dark};
   box-shadow: ${vars.bigBoxShadow};
@@ -128,26 +129,9 @@ export const BaseButton = styled.button`
   }
 `
 
-export const MenuIcon = styled(BaseButton)`
-  background-color: ${colors.light};
-  display: block;
-  height: ${vars.length};
-`
-
 export const Adder = styled(BaseButton)``
 
 export const Remover = styled(BaseButton)``
-
-export const SoundToggle = styled(MenuIcon)`
-  border-radius: 10px 10px 0 0;
-`
-
-export const AccidentalToggle = styled(MenuIcon)`
-  border-bottom: 0.1rem solid;
-  border-color: ${colors.grey};
-`
-
-export const Instrument = styled(MenuIcon)``
 
 export const Sharpen = styled(BaseButton)`
   background-color: ${colors.light};
@@ -158,3 +142,20 @@ export const Flatten = styled(BaseButton)`
   background-color: ${colors.light};
   height: calc(3 / 4 * ${vars.length});
 `
+
+export const MenuItem = styled(BaseButton)`
+  background-color: ${colors.light};
+  display: block;
+  height: ${vars.length};
+`
+
+export const SoundToggle = styled(MenuItem)`
+  border-radius: ${vars.borderRadius};
+`
+
+export const AccidentalToggle = styled(MenuItem)`
+  border-bottom: 0.1rem solid;
+  border-color: ${colors.grey};
+`
+
+export const Instrument = styled(MenuItem)``

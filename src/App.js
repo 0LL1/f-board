@@ -68,7 +68,7 @@ class App extends Component {
   }
 
   removeLowString = () => {
-    this.state.instrument.length > 4 &&
+    this.state.instrument.length > 1 &&
       this.setState(prevState => {
         return { instrument: prevState.instrument.slice(1) }
       })
@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   removeHighString = () => {
-    this.state.instrument.length > 4 &&
+    this.state.instrument.length > 1 &&
       this.setState(prevState => {
         return { instrument: prevState.instrument.slice(0, -1) }
       })
