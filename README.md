@@ -2,9 +2,9 @@
 
 f-board helps you to master your string instrument. It's designed to be flexible, intuitive to use, and mobile friendly.
 
-Choose an instrument or configure your own. String count can vary from one to eight and all tunings are possible. Toggle between sharps and flats or sound and silence. And most importantly, select any notes and note combinations that you want to see on the board.
+Choose an instrument or configure your own. String count can vary from one to eight and all tunings are possible. Toggle between sharps and flats or sound and silence. And most importantly, select any note combinations that you want to see on the board. Happy pattern recognitions!
 
-[Try it here!]()
+[Try it here.](https://f-board.netlify.com/)
 
 ---
 
