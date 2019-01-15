@@ -11,7 +11,7 @@ export const colors = {
 }
 
 export const vars = {
-  length: '2.4rem',
+  length: '2.5rem',
   smallBoxShadow: '0px 5px 100px 0 rgba(0, 0, 0, 0.9)',
   bigBoxShadow: '0px 5px 200px 0 rgba(0, 0, 0, 0.9)',
   transition: 'all 0.175s ease-in-out',

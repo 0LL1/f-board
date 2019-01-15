@@ -5,6 +5,8 @@ import Nav from './components/nav'
 import { instruments } from './components/instruments'
 import { GlobalStyle, StyledApp } from './components/styles'
 
+const audioContext = new AudioContext()
+
 class App extends Component {
   state = {
     instrument: instruments.guitar,
@@ -30,7 +32,6 @@ class App extends Component {
   }
 
   playSound = tone => {
-    const audioContext = new AudioContext()
     const oscillator = audioContext.createOscillator()
     const gainNode = audioContext.createGain()
     gainNode.gain.value = 0.5
