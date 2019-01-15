@@ -28,20 +28,20 @@ const String = ({
         sound && playSound(tone)
       }}
     >
-      <svg width="2.4rem" height="2.4rem">
+      <svg width="2.5rem" height="2.5rem">
         <line
-          x1="1.2rem"
+          x1="1.25rem"
           y1="0rem"
-          x2="1.2rem"
-          y2="0.6rem"
+          x2="1.25rem"
+          y2="0.65rem"
           stroke={colors.grey}
           strokeWidth="0.1rem"
         />
         <line
-          x1="1.2rem"
-          y1="1.8rem"
-          x2="1.2rem"
-          y2="2.4rem"
+          x1="1.25rem"
+          y1="1.75rem"
+          x2="1.25rem"
+          y2="2.5rem"
           stroke={colors.grey}
           strokeWidth="0.1rem"
         />
