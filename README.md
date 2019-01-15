@@ -1,10 +1,12 @@
 # f-board
 
-f-board helps you to master your string instrument. It's designed to be flexible, intuitive to use, and mobile friendly.
+f-board is a progressive web app that helps you to recognize note patterns on your string instrument. It's designed to be flexible, intuitive to use, and mobile friendly.
 
-Choose an instrument or configure your own. Add strings up to eight or remove down to one. Toggle between sharps and flats or sound and silence. And most importantly, select any note combinations that you want to see on the board. Happy pattern recognitions!
+It's perfect for those who are learning a new instrument or experimenting with new tunings. You can choose from five instrument templates, add and remove strings, and tune each string freely. You can also toggle between sharps and flats and disable sounds.
 
-[Try it here.](https://f-board.netlify.com/)
+Then you can select any note combinations that you are practicing by simply clicking or tapping them on the board.
+
+[Try it here!](https://f-board.netlify.com/)
 
 ---
 

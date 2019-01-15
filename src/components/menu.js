@@ -38,7 +38,7 @@ const Menu = ({
           native
           items={menuOpen}
           from={{ height: 0 }}
-          enter={{ height: 268 }}
+          enter={{ height: 280 }}
           leave={{ height: 0 }}
           config={{ duration: 175 }}
         >
