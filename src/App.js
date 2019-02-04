@@ -22,13 +22,12 @@ class App extends Component {
       ? this.setState(
           prevState => new Set(prevState.selected.add(Note.chroma(tone)))
         )
-      : this.setState(
-          prevState => {
-            prevState.selected.delete(Note.chroma(tone))
-            new Set(prevState.selected)
-          },
-          () => this.forceUpdate()
-        )
+      : this.setState(prevState => {
+          prevState.selected.delete(Note.chroma(tone))
+          return {
+            selected: new Set(prevState.selected)
+          }
+        })
   }
 
   playSound = tone => {
