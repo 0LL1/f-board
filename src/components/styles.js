@@ -3,17 +3,17 @@ import styled, { createGlobalStyle } from 'styled-components'
 // Variables
 export const colors = {
   light: '#ffffff',
-  dark: '#333333',
-  grey: '#888888',
-  highlight: '#FF851B',
-  lighter: '#ffd268',
+  dark: '#111111',
+  grey: '#555555',
+  highlight: '#ff851b',
+  background: '#333333',
   transparent: '#00000000'
 }
 
 export const vars = {
   length: '2.5rem',
-  smallBoxShadow: '0px 5px 100px 0 rgba(0, 0, 0, 0.9)',
-  bigBoxShadow: '0px 5px 200px 0 rgba(0, 0, 0, 0.9)',
+  smallBoxShadow: '0px 5px 25px 0 rgba(0, 0, 0, 0.3)',
+  bigBoxShadow: '0px 5px 50px 0 rgba(0, 0, 0, 0.3)',
   transition: 'all 0.175s ease-in-out',
   borderRadius: '0.75rem 0.75rem 0 0'
 }
@@ -21,7 +21,7 @@ export const vars = {
 // Global style
 export const GlobalStyle = createGlobalStyle`
   html {
-    background-color: ${colors.lighter};
+    background-color: ${colors.background};
     font-size: 16px;
   }
   body {
@@ -51,7 +51,7 @@ export const StyledApp = styled.div`
   justify-content: center;
   align-content: center;
   min-height: 100vh;
-  background-color: ${colors.lighter};
+  background-color: ${colors.background};
   background-size: 100%;
 `
 
