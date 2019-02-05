@@ -5,7 +5,7 @@ import Nav from './components/nav'
 import { instruments } from './components/instruments'
 import { GlobalStyle, StyledApp } from './components/styles'
 
-const audioContext = new AudioContext()
+const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
 class App extends Component {
   state = {
