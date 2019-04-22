@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import * as Note from 'tonal-note'
 import Fingerboard from './components/fingerboard'
 import Nav from './components/nav'
@@ -7,30 +7,24 @@ import { GlobalStyle, StyledApp } from './components/styles'
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
-class App extends Component {
-  state = {
-    instrument: instruments.guitar,
-    fretCount: 26,
-    selected: new Set(),
-    sharps: true,
-    sound: true,
-    menuOpen: false
+const App = () => {
+  const [instrument, setInstrument] = useState(instruments.guitar)
+  const [selected, setSelected] = useState(new Set())
+  const [sharps, setSharps] = useState(true)
+  const [sound, setSound] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const select = tone => {
+    const pc = Note.chroma(tone)
+    if (selected.has(pc)) {
+      selected.delete(pc)
+      setSelected(new Set(selected))
+    } else {
+      setSelected(new Set(selected.add(pc)))
+    }
   }
 
-  select = tone => {
-    !this.state.selected.has(Note.chroma(tone))
-      ? this.setState(
-          prevState => new Set(prevState.selected.add(Note.chroma(tone)))
-        )
-      : this.setState(prevState => {
-          prevState.selected.delete(Note.chroma(tone))
-          return {
-            selected: new Set(prevState.selected)
-          }
-        })
-  }
-
-  playSound = tone => {
+  const playSound = tone => {
     const oscillator = audioContext.createOscillator()
     const gainNode = audioContext.createGain()
     gainNode.gain.value = 0.5
@@ -42,103 +36,83 @@ class App extends Component {
     oscillator.stop(audioContext.currentTime + 0.4)
   }
 
-  changeAccidentalType = () => {
-    this.setState(prevState => {
-      return { sharps: !prevState.sharps }
-    })
+  const changeAccidentalType = () => {
+    setSharps(prevState => !prevState)
   }
 
-  changeInstrument = instrument => {
-    this.setState({ instrument: instrument })
+  const changeInstrument = instrument => {
+    setInstrument(instrument)
   }
 
-  toggleSound = () => {
-    this.setState(prevState => {
-      return { sound: !prevState.sound }
-    })
+  const toggleSound = () => {
+    setSound(prevState => !prevState)
   }
 
-  addLowString = () => {
-    this.state.instrument.length < 8 &&
-      this.setState(prevState => {
-        const instrument = prevState.instrument
-        const newInstrument = instrument[0] - 5
-        return { instrument: [newInstrument, ...instrument] }
-      })
+  const addLowString = () => {
+    instrument.length < 8 &&
+      setInstrument(prevState => [instrument[0] - 5, ...prevState])
   }
 
-  removeLowString = () => {
-    this.state.instrument.length > 1 &&
-      this.setState(prevState => {
-        return { instrument: prevState.instrument.slice(1) }
-      })
+  const removeLowString = () => {
+    instrument.length > 1 && setInstrument(prevState => prevState.slice(1))
   }
 
-  addHighString = () => {
-    this.state.instrument.length < 8 &&
-      this.setState(prevState => {
-        const instrument = prevState.instrument
-        const newInstrument = instrument[instrument.length - 1] + 5
-        return { instrument: instrument.concat(newInstrument) }
-      })
+  const addHighString = () => {
+    instrument.length < 8 &&
+      setInstrument(prevState =>
+        prevState.concat(instrument[instrument.length - 1] + 5)
+      )
   }
 
-  removeHighString = () => {
-    this.state.instrument.length > 1 &&
-      this.setState(prevState => {
-        return { instrument: prevState.instrument.slice(0, -1) }
-      })
+  const removeHighString = () => {
+    instrument.length > 1 && setInstrument(prevState => prevState.slice(0, -1))
   }
 
-  sharpen = index => {
-    const newInstrument = [...this.state.instrument]
+  const sharpen = index => {
+    const newInstrument = [...instrument]
     newInstrument[index]++
-    this.setState({ instrument: newInstrument })
+    setInstrument(newInstrument)
   }
 
-  flatten = index => {
-    const newInstrument = [...this.state.instrument]
+  const flatten = index => {
+    const newInstrument = [...instrument]
     newInstrument[index]--
-    this.setState({ instrument: newInstrument })
+    setInstrument(newInstrument)
   }
 
-  openMenu = () => {
-    this.setState(prevState => {
-      return { menuOpen: !prevState.menuOpen }
-    })
+  const openMenu = () => {
+    setMenuOpen(prevState => !prevState)
   }
 
-  render() {
-    return (
-      <StyledApp>
-        <GlobalStyle />
-        <Fingerboard
-          instrument={this.state.instrument}
-          fretCount={this.state.fretCount}
-          selected={this.state.selected}
-          sharps={this.state.sharps}
-          sound={this.state.sound}
-          select={this.select}
-          playSound={this.playSound}
-          sharpen={this.sharpen}
-          flatten={this.flatten}
-        />
-        <Nav
-          sharps={this.state.sharps}
-          sound={this.state.sound}
-          menuOpen={this.state.menuOpen}
-          addLowString={this.addLowString}
-          removeLowString={this.removeLowString}
-          removeHighString={this.removeHighString}
-          addHighString={this.addHighString}
-          openMenu={this.openMenu}
-          toggleSound={this.toggleSound}
-          changeAccidentalType={this.changeAccidentalType}
-          changeInstrument={this.changeInstrument}
-        />
-      </StyledApp>
-    )
-  }
+  return (
+    <StyledApp>
+      <GlobalStyle />
+      <Fingerboard
+        instrument={instrument}
+        fretCount={26}
+        selected={selected}
+        sharps={sharps}
+        sound={sound}
+        select={select}
+        playSound={playSound}
+        sharpen={sharpen}
+        flatten={flatten}
+      />
+      <Nav
+        sharps={sharps}
+        sound={sound}
+        menuOpen={menuOpen}
+        addLowString={addLowString}
+        removeLowString={removeLowString}
+        removeHighString={removeHighString}
+        addHighString={addHighString}
+        openMenu={openMenu}
+        toggleSound={toggleSound}
+        changeAccidentalType={changeAccidentalType}
+        changeInstrument={changeInstrument}
+      />
+    </StyledApp>
+  )
 }
 
 export default App
