@@ -11,9 +11,9 @@ import {
 } from './styles'
 
 const Menu = ({
-  sharps,
-  sound,
-  menuOpen,
+  isSharps,
+  hasSound,
+  isMenuOpen,
   openMenu,
   toggleSound,
   changeAccidentalType,
@@ -31,12 +31,12 @@ const Menu = ({
   return (
     <>
       <MenuItem onClick={openMenu}>
-        {menuOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
+        {isMenuOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
       </MenuItem>
       <StyledMenu>
         <Transition
           native
-          items={menuOpen}
+          items={isMenuOpen}
           from={{ height: 0 }}
           enter={{ height: 280 }}
           leave={{ height: 0 }}
@@ -47,10 +47,10 @@ const Menu = ({
             (props => (
               <animated.div style={props}>
                 <SoundToggle onClick={toggleSound}>
-                  {sound ? <FiVolume2 /> : <FiVolumeX />}
+                  {hasSound ? <FiVolume2 /> : <FiVolumeX />}
                 </SoundToggle>
                 <AccidentalToggle onClick={changeAccidentalType}>
-                  {sharps ? '#' : 'b'}
+                  {isSharps ? '#' : 'b'}
                 </AccidentalToggle>
                 <div>{instrumentList}</div>
               </animated.div>

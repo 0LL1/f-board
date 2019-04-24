@@ -6,8 +6,8 @@ const FingerBoard = ({
   instrument,
   fretCount,
   selected,
-  sharps,
-  sound,
+  isSharps,
+  hasSound,
   select,
   playSound,
   sharpen,
@@ -20,8 +20,8 @@ const FingerBoard = ({
       tuning={tuning}
       fretCount={fretCount}
       selected={selected}
-      sharps={sharps}
-      sound={sound}
+      isSharps={isSharps}
+      hasSound={hasSound}
       select={select}
       playSound={playSound}
       sharpen={sharpen}

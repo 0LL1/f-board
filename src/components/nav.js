@@ -4,9 +4,9 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { StyledNav, Adder, Remover } from './styles'
 
 const Nav = ({
-  sharps,
-  sound,
-  menuOpen,
+  isSharps,
+  hasSound,
+  isMenuOpen,
   addLowString,
   removeLowString,
   removeHighString,
@@ -25,9 +25,9 @@ const Nav = ({
         <FiChevronRight className="icon" />
       </Remover>
       <Menu
-        sharps={sharps}
-        sound={sound}
-        menuOpen={menuOpen}
+        isSharps={isSharps}
+        hasSound={hasSound}
+        isMenuOpen={isMenuOpen}
         openMenu={openMenu}
         toggleSound={toggleSound}
         changeAccidentalType={changeAccidentalType}

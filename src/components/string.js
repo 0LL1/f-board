@@ -8,8 +8,8 @@ const String = ({
   tuning,
   fretCount,
   selected,
-  sharps,
-  sound,
+  isSharps,
+  hasSound,
   select,
   playSound,
   sharpen,
@@ -17,7 +17,7 @@ const String = ({
 }) => {
   const frets = Array.from({ length: fretCount }, (v, i) => i)
   const tones = frets.map(fret =>
-    Note.fromMidi(Note.midi(tuning + fret), sharps)
+    Note.fromMidi(Note.midi(tuning + fret), isSharps)
   )
   const notes = tones.map((tone, index) => (
     <NotePosition
@@ -25,7 +25,7 @@ const String = ({
       selected={selected.has(Note.chroma(tone))}
       onClick={() => {
         select(tone)
-        sound && playSound(tone)
+        hasSound && playSound(tone)
       }}
     >
       <svg width="40px" height="40px">
