@@ -10,6 +10,16 @@ import {
   Instrument
 } from "./styles"
 
+type MenuProps = {
+  isSharps: boolean
+  hasSound: boolean
+  isMenuOpen: boolean
+  openMenu: () => void
+  toggleSound: () => void
+  changeAccidentalType: () => void
+  changeInstrument: (instrument: number[]) => void
+}
+
 const Menu = ({
   isSharps,
   hasSound,
@@ -18,7 +28,7 @@ const Menu = ({
   toggleSound,
   changeAccidentalType,
   changeInstrument
-}) => {
+}: MenuProps) => {
   const transitions = useTransition(isMenuOpen, null, {
     from: { height: 0 },
     enter: { height: 280 },
@@ -26,14 +36,13 @@ const Menu = ({
     config: { duration: 175 }
   })
 
-  const instrumentList = Object.entries(instruments).map(instrument => (
-    <Instrument
-      key={instrument}
-      onClick={() => changeInstrument(instrument[1])}
-    >
-      {instrument[0]}
-    </Instrument>
-  ))
+  const instrumentList = Object.entries(instruments).map(
+    (instrument, index) => (
+      <Instrument key={index} onClick={() => changeInstrument(instrument[1])}>
+        {instrument[0]}
+      </Instrument>
+    )
+  )
 
   return (
     <>

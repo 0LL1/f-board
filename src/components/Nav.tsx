@@ -3,7 +3,7 @@ import Menu from "./Menu"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 import { StyledNav, Adder, Remover } from "./styles"
 
-type Props = {
+type NavProps = {
   isSharps: boolean
   hasSound: boolean
   isMenuOpen: boolean
@@ -29,7 +29,7 @@ const Nav = ({
   toggleSound,
   changeAccidentalType,
   changeInstrument
-}: Props) => {
+}: NavProps) => {
   return (
     <StyledNav>
       <Adder onClick={addLowString}>
