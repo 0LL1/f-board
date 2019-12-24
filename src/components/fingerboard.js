@@ -1,6 +1,6 @@
-import React from 'react'
-import String from './string'
-import { StyledFingerboard } from './styles'
+import React from "react"
+import String from "./String"
+import { StyledFingerboard } from "./styles"
 
 const FingerBoard = ({
   instrument,

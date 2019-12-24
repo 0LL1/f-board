@@ -1,7 +1,8 @@
-import React from 'react'
-import * as Note from 'tonal-note'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { colors, StyledString, Sharpen, Flatten, NotePosition } from './styles'
+import React from "react"
+import { note } from "@tonaljs/tonal"
+import { midiToNoteName } from "@tonaljs/midi"
+import { FiChevronDown, FiChevronUp } from "react-icons/fi"
+import { colors, StyledString, Sharpen, Flatten, NotePosition } from "./styles"
 
 const String = ({
   index,
@@ -17,12 +18,12 @@ const String = ({
 }) => {
   const frets = Array.from({ length: fretCount }, (v, i) => i)
   const tones = frets.map(fret =>
-    Note.fromMidi(Note.midi(tuning + fret), isSharps)
+    midiToNoteName(tuning + fret, { sharps: isSharps })
   )
   const notes = tones.map((tone, index) => (
     <NotePosition
       key={index}
-      selected={selected.has(Note.chroma(tone))}
+      selected={selected.has(note(tone).chroma)}
       onClick={() => {
         select(tone)
         hasSound && playSound(tone)
@@ -46,7 +47,7 @@ const String = ({
           strokeWidth="1.6px"
         />
       </svg>
-      {Note.pc(tone)}
+      {note(tone).pc}
     </NotePosition>
   ))
   return (

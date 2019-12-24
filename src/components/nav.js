@@ -1,7 +1,7 @@
-import React from 'react'
-import Menu from './menu'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { StyledNav, Adder, Remover } from './styles'
+import React from "react"
+import Menu from "./Menu"
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
+import { StyledNav, Adder, Remover } from "./styles"
 
 const Nav = ({
   isSharps,

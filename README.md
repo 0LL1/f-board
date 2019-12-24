@@ -15,7 +15,7 @@ Then you can select any note combinations that you are practicing by simply clic
 - [React](https://github.com/facebook/react)
 - [styled-components](https://github.com/styled-components/styled-components)
 - [create-react-app](https://github.com/facebook/create-react-app)
-- [tonal](https://github.com/danigb/tonal)
+- [tonal](https://github.com/tonaljs/tonal)
 - [react-spring](https://github.com/react-spring/react-spring)
 - [react-icons](https://github.com/react-icons/react-icons)
 - [Netlify](https://github.com/netlify)

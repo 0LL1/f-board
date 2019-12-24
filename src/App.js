@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import * as Note from 'tonal-note'
-import Fingerboard from './components/fingerboard'
-import Nav from './components/nav'
-import { instruments } from './components/instruments'
-import { GlobalStyle, StyledApp } from './components/styles'
+import React, { useState } from "react"
+import { note } from "@tonaljs/tonal"
+import Fingerboard from "./components/Fingerboard"
+import Nav from "./components/Nav"
+import { instruments } from "./components/instruments"
+import { GlobalStyle, StyledApp } from "./components/styles"
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
@@ -15,7 +15,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const select = tone => {
-    const pc = Note.chroma(tone)
+    const pc = note(tone).chroma
     if (selected.has(pc)) {
       selected.delete(pc)
       setSelected(new Set(selected))
@@ -30,8 +30,8 @@ const App = () => {
     gainNode.gain.value = 0.5
     oscillator.connect(gainNode)
     gainNode.connect(audioContext.destination)
-    oscillator.type = 'triangle'
-    oscillator.frequency.value = Note.freq(tone)
+    oscillator.type = "triangle"
+    oscillator.frequency.value = note(tone).freq
     oscillator.start()
     oscillator.stop(audioContext.currentTime + 0.4)
   }
