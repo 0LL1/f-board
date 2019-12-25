@@ -1,21 +1,21 @@
-import styled, { createGlobalStyle } from 'styled-components/macro'
+import styled, { createGlobalStyle } from "styled-components/macro"
 
 // Variables
 export const colors = {
-  light: '#ffffff',
-  dark: '#111111',
-  grey: '#555555',
-  highlight: '#ff851b',
-  background: '#333333',
-  transparent: '#00000000'
+  light: "#ffffff",
+  dark: "#111111",
+  grey: "#555555",
+  highlight: "#ff851b",
+  background: "#333333",
+  transparent: "#00000000"
 }
 
 export const vars = {
-  length: '2.5rem',
-  smallBoxShadow: '0px 5px 25px 0 rgba(0, 0, 0, 0.3)',
-  bigBoxShadow: '0px 5px 50px 0 rgba(0, 0, 0, 0.3)',
-  transition: 'all 0.175s ease-in-out',
-  borderRadius: '0.75rem 0.75rem 0 0'
+  length: "2.5rem",
+  smallBoxShadow: "0px 5px 25px 0 rgba(0, 0, 0, 0.3)",
+  bigBoxShadow: "0px 5px 50px 0 rgba(0, 0, 0, 0.3)",
+  transition: "all 0.175s ease-in-out",
+  borderRadius: "0.75rem 0.75rem 0 0"
 }
 
 // Global style
@@ -76,8 +76,8 @@ export const NotePosition = styled.div`
   width: ${vars.length};
   height: ${vars.length};
   border: none;
-  font-size: ${props => (props.selected ? '1.4rem' : '1rem')};
-  color: ${props => (props.selected ? colors.highlight : colors.grey)};
+  font-size: ${props => (props["data-selected"] ? "1.4rem" : "1rem")};
+  color: ${props => (props["data-selected"] ? colors.highlight : colors.grey)};
   transition: ${vars.transition};
   svg {
     position: absolute;

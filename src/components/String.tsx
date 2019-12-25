@@ -4,6 +4,19 @@ import { midiToNoteName } from "@tonaljs/midi"
 import { FiChevronDown, FiChevronUp } from "react-icons/fi"
 import { colors, StyledString, Sharpen, Flatten, NotePosition } from "./styles"
 
+type StringProps = {
+  index: number
+  tuning: number
+  fretCount: number
+  selected: Set<number | undefined>
+  isSharps: boolean
+  hasSound: boolean
+  select: (tone: string) => void
+  playSound: (tone: string) => void
+  sharpen: (index: number) => void
+  flatten: (index: number) => void
+}
+
 const String = ({
   index,
   tuning,
@@ -15,7 +28,7 @@ const String = ({
   playSound,
   sharpen,
   flatten
-}) => {
+}: StringProps) => {
   const frets = Array.from({ length: fretCount }, (v, i) => i)
   const tones = frets.map(fret =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
@@ -23,7 +36,7 @@ const String = ({
   const notes = tones.map((tone, index) => (
     <NotePosition
       key={index}
-      selected={selected.has(note(tone).chroma)}
+      data-selected={selected.has(note(tone).chroma)}
       onClick={() => {
         select(tone)
         hasSound && playSound(tone)
