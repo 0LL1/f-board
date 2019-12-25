@@ -29,7 +29,7 @@ const String = ({
   sharpen,
   flatten
 }: StringProps) => {
-  const frets = Array.from({ length: fretCount }, (v, i) => i)
+  const frets = Array.from({ length: fretCount }, (_v, i) => i)
   const tones = frets.map(fret =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
   )
