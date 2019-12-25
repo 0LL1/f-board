@@ -5,16 +5,17 @@ import Nav from "./components/Nav"
 import { instruments } from "./components/instruments"
 import { GlobalStyle, StyledApp } from "./components/styles"
 
-const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+const audioContext: AudioContext = new (window.AudioContext ||
+  window.webkitAudioContext)()
 
 const App = () => {
   const [instrument, setInstrument] = useState(instruments.guitar)
-  const [selected, setSelected] = useState(new Set())
+  const [selected, setSelected] = useState<Set<number | undefined>>(new Set())
   const [isSharps, setIsSharps] = useState(true)
   const [hasSound, setHasSound] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const select = tone => {
+  const select = (tone: string) => {
     const pc = note(tone).chroma
     if (selected.has(pc)) {
       selected.delete(pc)
@@ -24,14 +25,14 @@ const App = () => {
     }
   }
 
-  const playSound = tone => {
+  const playSound = (tone: string) => {
     const oscillator = audioContext.createOscillator()
     const gainNode = audioContext.createGain()
     gainNode.gain.value = 0.5
     oscillator.connect(gainNode)
     gainNode.connect(audioContext.destination)
     oscillator.type = "triangle"
-    oscillator.frequency.value = note(tone).freq
+    oscillator.frequency.value = note(tone).freq || 0
     oscillator.start()
     oscillator.stop(audioContext.currentTime + 0.4)
   }
@@ -40,7 +41,7 @@ const App = () => {
     setIsSharps(prevState => !prevState)
   }
 
-  const changeInstrument = instrument => {
+  const changeInstrument = (instrument: number[]) => {
     setInstrument(instrument)
   }
 
@@ -68,13 +69,13 @@ const App = () => {
     instrument.length > 1 && setInstrument(prevState => prevState.slice(0, -1))
   }
 
-  const sharpen = index => {
+  const sharpen = (index: number) => {
     const newInstrument = [...instrument]
     newInstrument[index]++
     setInstrument(newInstrument)
   }
 
-  const flatten = index => {
+  const flatten = (index: number) => {
     const newInstrument = [...instrument]
     newInstrument[index]--
     setInstrument(newInstrument)

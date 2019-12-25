@@ -14,7 +14,7 @@ type NavProps = {
   openMenu: () => void
   toggleSound: () => void
   changeAccidentalType: () => void
-  changeInstrument: () => void
+  changeInstrument: (instrument: number[]) => void
 }
 
 const Nav = ({
