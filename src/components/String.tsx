@@ -36,7 +36,7 @@ const String = ({
   const notes = tones.map((tone, index) => (
     <NotePosition
       key={index}
-      data-selected={selected.has(note(tone).chroma)}
+      isSelected={selected.has(note(tone).chroma)}
       onClick={() => {
         select(tone)
         hasSound && playSound(tone)

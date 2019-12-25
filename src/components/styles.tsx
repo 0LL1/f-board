@@ -69,15 +69,19 @@ export const StyledString = styled.div`
   flex-direction: column;
 `
 
-export const NotePosition = styled.div`
+type NotePositionProps = {
+  isSelected: boolean
+}
+
+export const NotePosition = styled.div<NotePositionProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: ${vars.length};
   height: ${vars.length};
   border: none;
-  font-size: ${props => (props["data-selected"] ? "1.4rem" : "1rem")};
-  color: ${props => (props["data-selected"] ? colors.highlight : colors.grey)};
+  font-size: ${props => (props.isSelected ? "1.4rem" : "1rem")};
+  color: ${props => (props.isSelected ? colors.highlight : colors.grey)};
   transition: ${vars.transition};
   svg {
     position: absolute;
