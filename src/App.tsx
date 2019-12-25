@@ -5,8 +5,7 @@ import Nav from "./components/Nav"
 import { instruments } from "./components/instruments"
 import { GlobalStyle, StyledApp } from "./components/styles"
 
-const audioContext: AudioContext = new (window.AudioContext ||
-  window.webkitAudioContext)()
+const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
 const App = () => {
   const [instrument, setInstrument] = useState(instruments.guitar)
