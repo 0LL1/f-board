@@ -1,7 +1,7 @@
-import React from "react"
-import Menu from "./Menu"
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
-import { StyledNav, Adder, Remover } from "./styles"
+import React from 'react'
+import Menu from './Menu'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { StyledNav, Adder, Remover } from './styles'
 
 type NavProps = {
   isSharps: boolean
@@ -32,10 +32,10 @@ const Nav = ({
 }: NavProps) => {
   return (
     <StyledNav>
-      <Adder onClick={addLowString}>
+      <Adder onClick={addLowString} data-test="add-low-string">
         <FiChevronLeft className="icon" />
       </Adder>
-      <Remover onClick={removeLowString}>
+      <Remover onClick={removeLowString} data-test="remove-low-string">
         <FiChevronRight className="icon" />
       </Remover>
       <Menu
@@ -47,10 +47,10 @@ const Nav = ({
         changeAccidentalType={changeAccidentalType}
         changeInstrument={changeInstrument}
       />
-      <Remover onClick={removeHighString}>
+      <Remover onClick={removeHighString} data-test="remove-high-string">
         <FiChevronLeft className="icon" />
       </Remover>
-      <Adder onClick={addHighString}>
+      <Adder onClick={addHighString} data-test="add-high-string">
         <FiChevronRight className="icon" />
       </Adder>
     </StyledNav>
