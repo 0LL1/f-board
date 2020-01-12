@@ -1,14 +1,14 @@
 import React from 'react'
 import { useTransition, animated } from 'react-spring'
 import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi'
-import { instruments } from './instruments'
+import { instruments } from '../instruments'
 import {
   StyledMenu,
   MenuItem,
   SoundToggle,
   AccidentalToggle,
   Instrument
-} from './styles'
+} from '../styles'
 
 type MenuProps = {
   isSharps: boolean
@@ -57,7 +57,10 @@ const Menu = ({
                 <SoundToggle onClick={toggleSound}>
                   {hasSound ? <FiVolume2 /> : <FiVolumeX />}
                 </SoundToggle>
-                <AccidentalToggle onClick={changeAccidentalType}>
+                <AccidentalToggle
+                  onClick={changeAccidentalType}
+                  data-test="accidental-toggle"
+                >
                   {isSharps ? '#' : 'b'}
                 </AccidentalToggle>
                 <div>{instrumentList}</div>

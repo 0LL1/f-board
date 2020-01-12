@@ -1,8 +1,8 @@
-import React from "react"
-import { note } from "@tonaljs/tonal"
-import { midiToNoteName } from "@tonaljs/midi"
-import { FiChevronDown, FiChevronUp } from "react-icons/fi"
-import { colors, StyledString, Sharpen, Flatten, NotePosition } from "./styles"
+import React from 'react'
+import { note } from '@tonaljs/tonal'
+import { midiToNoteName } from '@tonaljs/midi'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { colors, StyledString, Sharpen, Flatten, NotePosition } from '../styles'
 
 type StringProps = {
   index: number
@@ -65,13 +65,19 @@ const String = ({
   ))
   return (
     <StyledString>
-      <Sharpen onClick={() => sharpen(index)}>
+      <Sharpen
+        onClick={() => sharpen(index)}
+        data-test={`sharpen-${index + 1}`}
+      >
         <FiChevronUp className="icon" />
       </Sharpen>
-      <Flatten onClick={() => flatten(index)}>
+      <Flatten
+        onClick={() => flatten(index)}
+        data-test={`flatten-${index + 1}`}
+      >
         <FiChevronDown className="icon" />
       </Flatten>
-      <div>{notes}</div>
+      <div data-test={`string-${index + 1}`}>{notes}</div>
     </StyledString>
   )
 }

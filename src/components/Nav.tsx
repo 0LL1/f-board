@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { StyledNav, Adder, Remover } from './styles'
+import { StyledNav, Adder, Remover } from '../styles'
 
 type NavProps = {
   isSharps: boolean

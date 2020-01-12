@@ -1,6 +1,6 @@
-import React from "react"
-import String from "./String"
-import { StyledFingerboard } from "./styles"
+import React from 'react'
+import String from './String'
+import { StyledFingerboard } from '../styles'
 
 type FingerboardProps = {
   instrument: number[]
@@ -40,7 +40,9 @@ const FingerBoard = ({
       flatten={flatten}
     />
   ))
-  return <StyledFingerboard>{strings}</StyledFingerboard>
+  return (
+    <StyledFingerboard data-test="fingerboard">{strings}</StyledFingerboard>
+  )
 }
 
 export default FingerBoard
