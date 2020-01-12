@@ -10,9 +10,6 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 const App = () => {
   const [instrument, setInstrument] = useState(instruments.guitar)
   const [selected, setSelected] = useState<Set<number | undefined>>(new Set())
-  const [isSharps, setIsSharps] = useState(true)
-  const [hasSound, setHasSound] = useState(true)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const select = (tone: string) => {
     const pc = note(tone).chroma
@@ -36,16 +33,8 @@ const App = () => {
     oscillator.stop(audioContext.currentTime + 0.4)
   }
 
-  const changeAccidentalType = () => {
-    setIsSharps(prevState => !prevState)
-  }
-
   const changeInstrument = (instrument: number[]) => {
     setInstrument(instrument)
-  }
-
-  const toggleSound = () => {
-    setHasSound(prevState => !prevState)
   }
 
   const addLowString = () => {
@@ -80,10 +69,6 @@ const App = () => {
     setInstrument(newInstrument)
   }
 
-  const openMenu = () => {
-    setIsMenuOpen(prevState => !prevState)
-  }
-
   return (
     <StyledApp>
       <GlobalStyle />
@@ -91,24 +76,16 @@ const App = () => {
         instrument={instrument}
         fretCount={26}
         selected={selected}
-        isSharps={isSharps}
-        hasSound={hasSound}
         select={select}
         playSound={playSound}
         sharpen={sharpen}
         flatten={flatten}
       />
       <Nav
-        isSharps={isSharps}
-        hasSound={hasSound}
-        isMenuOpen={isMenuOpen}
         addLowString={addLowString}
         removeLowString={removeLowString}
         removeHighString={removeHighString}
         addHighString={addHighString}
-        openMenu={openMenu}
-        toggleSound={toggleSound}
-        changeAccidentalType={changeAccidentalType}
         changeInstrument={changeInstrument}
       />
     </StyledApp>

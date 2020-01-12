@@ -6,8 +6,6 @@ type FingerboardProps = {
   instrument: number[]
   fretCount: number
   selected: Set<number | undefined>
-  isSharps: boolean
-  hasSound: boolean
   select: (tone: string) => void
   playSound: (tone: string) => void
   sharpen: (index: number) => void
@@ -18,8 +16,6 @@ const FingerBoard = ({
   instrument,
   fretCount,
   selected,
-  isSharps,
-  hasSound,
   select,
   playSound,
   sharpen,
@@ -32,8 +28,6 @@ const FingerBoard = ({
       tuning={tuning}
       fretCount={fretCount}
       selected={selected}
-      isSharps={isSharps}
-      hasSound={hasSound}
       select={select}
       playSound={playSound}
       sharpen={sharpen}

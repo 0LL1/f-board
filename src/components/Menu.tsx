@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTransition, animated } from 'react-spring'
 import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi'
 import { instruments } from '../instruments'
+import { toggleMenu, toggleAccidentals, toggleSound, RootState } from '../state'
 import {
   StyledMenu,
   MenuItem,
@@ -11,24 +13,18 @@ import {
 } from '../styles'
 
 type MenuProps = {
-  isSharps: boolean
-  hasSound: boolean
-  isMenuOpen: boolean
-  openMenu: () => void
-  toggleSound: () => void
-  changeAccidentalType: () => void
   changeInstrument: (instrument: number[]) => void
 }
 
-const Menu = ({
-  isSharps,
-  hasSound,
-  isMenuOpen,
-  openMenu,
-  toggleSound,
-  changeAccidentalType,
-  changeInstrument
-}: MenuProps) => {
+const Menu = ({ changeInstrument }: MenuProps) => {
+  const dispatch = useDispatch()
+  const { isMenuOpen, isSharps, hasSound } = useSelector((state: RootState) => {
+    return {
+      isMenuOpen: state.settings.isMenuOpen,
+      isSharps: state.settings.isSharps,
+      hasSound: state.settings.hasSound
+    }
+  })
   const transitions = useTransition(isMenuOpen, null, {
     from: { height: 0 },
     enter: { height: 280 },
@@ -46,7 +42,7 @@ const Menu = ({
 
   return (
     <>
-      <MenuItem onClick={openMenu} data-test="menu-button">
+      <MenuItem onClick={() => dispatch(toggleMenu())} data-test="menu-button">
         {isMenuOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
       </MenuItem>
       <StyledMenu>
@@ -54,11 +50,11 @@ const Menu = ({
           ({ item, key, props }) =>
             item && (
               <animated.div style={props} key={key}>
-                <SoundToggle onClick={toggleSound}>
+                <SoundToggle onClick={() => dispatch(toggleSound())}>
                   {hasSound ? <FiVolume2 /> : <FiVolumeX />}
                 </SoundToggle>
                 <AccidentalToggle
-                  onClick={changeAccidentalType}
+                  onClick={() => dispatch(toggleAccidentals())}
                   data-test="accidental-toggle"
                 >
                   {isSharps ? '#' : 'b'}

@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { note } from '@tonaljs/tonal'
 import { midiToNoteName } from '@tonaljs/midi'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { RootState } from '../state'
 import { colors, StyledString, Sharpen, Flatten, NotePosition } from '../styles'
 
 type StringProps = {
@@ -9,8 +11,6 @@ type StringProps = {
   tuning: number
   fretCount: number
   selected: Set<number | undefined>
-  isSharps: boolean
-  hasSound: boolean
   select: (tone: string) => void
   playSound: (tone: string) => void
   sharpen: (index: number) => void
@@ -22,13 +22,18 @@ const String = ({
   tuning,
   fretCount,
   selected,
-  isSharps,
-  hasSound,
   select,
   playSound,
   sharpen,
   flatten
 }: StringProps) => {
+  const { isSharps, hasSound } = useSelector((state: RootState) => {
+    return {
+      isSharps: state.settings.isSharps,
+      hasSound: state.settings.hasSound
+    }
+  })
+
   const frets = Array.from({ length: fretCount }, (_v, i) => i)
   const tones = frets.map(fret =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
