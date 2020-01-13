@@ -32,36 +32,41 @@ const String = ({ index, tuning }: StringProps) => {
   const tones = frets.map(fret =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
   )
-  const notes = tones.map((tone, index) => (
-    <NotePosition
-      key={index}
-      isSelected={selected.includes(note(tone).chroma as number)}
-      onClick={() => {
-        dispatch(select(tone))
-        hasSound && playSound(tone)
-      }}
-    >
-      <svg width="40px" height="40px">
-        <line
-          x1="20px"
-          y1="0px"
-          x2="20px"
-          y2="10.4px"
-          stroke={colors.grey}
-          strokeWidth="1.6px"
-        />
-        <line
-          x1="20px"
-          y1="28px"
-          x2="20px"
-          y2="40px"
-          stroke={colors.grey}
-          strokeWidth="1.6px"
-        />
-      </svg>
-      {note(tone).pc}
-    </NotePosition>
-  ))
+  const notes = tones.map((tone, index) => {
+    const isSelected = selected.includes(note(tone).chroma as number)
+
+    return (
+      <NotePosition
+        key={index}
+        isSelected={isSelected}
+        onClick={() => {
+          dispatch(select(tone))
+          hasSound && playSound(tone)
+        }}
+        data-test={isSelected ? 'selected' : 'not-selected'}
+      >
+        <svg width="40px" height="40px">
+          <line
+            x1="20px"
+            y1="0px"
+            x2="20px"
+            y2="10.4px"
+            stroke={colors.grey}
+            strokeWidth="1.6px"
+          />
+          <line
+            x1="20px"
+            y1="28px"
+            x2="20px"
+            y2="40px"
+            stroke={colors.grey}
+            strokeWidth="1.6px"
+          />
+        </svg>
+        {note(tone).pc}
+      </NotePosition>
+    )
+  })
   return (
     <StyledString>
       <Sharpen
