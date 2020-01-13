@@ -53,18 +53,6 @@ const App = () => {
     instrument.length > 1 && setInstrument(prevState => prevState.slice(0, -1))
   }
 
-  const sharpen = (index: number) => {
-    const newInstrument = [...instrument]
-    newInstrument[index]++
-    setInstrument(newInstrument)
-  }
-
-  const flatten = (index: number) => {
-    const newInstrument = [...instrument]
-    newInstrument[index]--
-    setInstrument(newInstrument)
-  }
-
   return (
     <StyledApp>
       <GlobalStyle />
@@ -73,8 +61,6 @@ const App = () => {
         selected={selected}
         select={select}
         playSound={playSound}
-        sharpen={sharpen}
-        flatten={flatten}
       />
       <Nav
         addLowString={addLowString}

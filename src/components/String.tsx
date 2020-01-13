@@ -1,9 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { note } from '@tonaljs/tonal'
 import { midiToNoteName } from '@tonaljs/midi'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { RootState } from '../state'
+import { sharpen, flatten, RootState } from '../state'
 import { colors, StyledString, Sharpen, Flatten, NotePosition } from '../styles'
 
 type StringProps = {
@@ -13,8 +13,6 @@ type StringProps = {
   selected: Set<number | undefined>
   select: (tone: string) => void
   playSound: (tone: string) => void
-  sharpen: (index: number) => void
-  flatten: (index: number) => void
 }
 
 const String = ({
@@ -23,10 +21,9 @@ const String = ({
   fretCount,
   selected,
   select,
-  playSound,
-  sharpen,
-  flatten
+  playSound
 }: StringProps) => {
+  const dispatch = useDispatch()
   const { isSharps, hasSound } = useSelector((state: RootState) => {
     return {
       isSharps: state.settings.isSharps,
@@ -71,13 +68,13 @@ const String = ({
   return (
     <StyledString>
       <Sharpen
-        onClick={() => sharpen(index)}
+        onClick={() => dispatch(sharpen(index))}
         data-test={`sharpen-${index + 1}`}
       >
         <FiChevronUp className="icon" />
       </Sharpen>
       <Flatten
-        onClick={() => flatten(index)}
+        onClick={() => dispatch(flatten(index))}
         data-test={`flatten-${index + 1}`}
       >
         <FiChevronDown className="icon" />

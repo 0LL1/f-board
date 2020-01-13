@@ -9,17 +9,13 @@ type FingerboardProps = {
   selected: Set<number | undefined>
   select: (tone: string) => void
   playSound: (tone: string) => void
-  sharpen: (index: number) => void
-  flatten: (index: number) => void
 }
 
 const FingerBoard = ({
   fretCount,
   selected,
   select,
-  playSound,
-  sharpen,
-  flatten
+  playSound
 }: FingerboardProps) => {
   const { instrument } = useSelector((state: RootState) => {
     return {
@@ -36,8 +32,6 @@ const FingerBoard = ({
       selected={selected}
       select={select}
       playSound={playSound}
-      sharpen={sharpen}
-      flatten={flatten}
     />
   ))
   return (

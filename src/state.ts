@@ -13,9 +13,15 @@ const instrument = createSlice({
   name: 'instrument',
   initialState: instruments.guitar,
   reducers: {
-    changeInstrument: (_state, action) => action.payload
-    // sharpen:
-    // flatten:
+    changeInstrument: (_state, action) => action.payload,
+    sharpen: (state, action) =>
+      state.map((tuning, index) =>
+        index === action.payload ? tuning + 1 : tuning
+      ),
+    flatten: (state, action) =>
+      state.map((tuning, index) =>
+        index === action.payload ? tuning - 1 : tuning
+      )
     // addLowString:
     // removeLowString:
     // addhighString:
@@ -50,5 +56,5 @@ export const store = configureStore({
 })
 
 // export const {} = selected.actions
-export const { changeInstrument } = instrument.actions
+export const { changeInstrument, sharpen, flatten } = instrument.actions
 export const { toggleMenu, toggleAccidentals, toggleSound } = settings.actions
