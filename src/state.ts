@@ -3,7 +3,7 @@ import { instruments } from './instruments'
 
 const selected = createSlice({
   name: 'selected',
-  initialState: new Set(),
+  initialState: [], // cannot be new Set()
   reducers: {
     // select: (state, payload) => payload
   }
@@ -13,7 +13,7 @@ const instrument = createSlice({
   name: 'instrument',
   initialState: instruments.guitar,
   reducers: {
-    change: (_state, action) => action.payload
+    changeInstrument: (_state, action) => action.payload
     // sharpen:
     // flatten:
     // addLowString:
@@ -50,5 +50,5 @@ export const store = configureStore({
 })
 
 // export const {} = selected.actions
-// export const {} = instrument.actions
+export const { changeInstrument } = instrument.actions
 export const { toggleMenu, toggleAccidentals, toggleSound } = settings.actions

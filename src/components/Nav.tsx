@@ -8,15 +8,13 @@ type NavProps = {
   removeLowString: () => void
   removeHighString: () => void
   addHighString: () => void
-  changeInstrument: (instrument: number[]) => void
 }
 
 const Nav = ({
   addLowString,
   removeLowString,
   removeHighString,
-  addHighString,
-  changeInstrument
+  addHighString
 }: NavProps) => {
   return (
     <StyledNav>
@@ -26,7 +24,7 @@ const Nav = ({
       <Remover onClick={removeLowString} data-test="remove-low-string">
         <FiChevronRight className="icon" />
       </Remover>
-      <Menu changeInstrument={changeInstrument} />
+      <Menu />
       <Remover onClick={removeHighString} data-test="remove-high-string">
         <FiChevronLeft className="icon" />
       </Remover>

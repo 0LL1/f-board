@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTransition, animated } from 'react-spring'
 import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi'
 import { instruments } from '../instruments'
-import { toggleMenu, toggleAccidentals, toggleSound, RootState } from '../state'
+import {
+  changeInstrument,
+  toggleMenu,
+  toggleAccidentals,
+  toggleSound,
+  RootState
+} from '../state'
 import {
   StyledMenu,
   MenuItem,
@@ -12,11 +18,7 @@ import {
   Instrument
 } from '../styles'
 
-type MenuProps = {
-  changeInstrument: (instrument: number[]) => void
-}
-
-const Menu = ({ changeInstrument }: MenuProps) => {
+const Menu = () => {
   const dispatch = useDispatch()
   const { isMenuOpen, isSharps, hasSound } = useSelector((state: RootState) => {
     return {
@@ -34,7 +36,10 @@ const Menu = ({ changeInstrument }: MenuProps) => {
 
   const instrumentList = Object.entries(instruments).map(
     (instrument, index) => (
-      <Instrument key={index} onClick={() => changeInstrument(instrument[1])}>
+      <Instrument
+        key={index}
+        onClick={() => dispatch(changeInstrument(instrument[1]))}
+      >
         {instrument[0]}
       </Instrument>
     )

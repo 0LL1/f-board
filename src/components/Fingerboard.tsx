@@ -1,9 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import String from './String'
+import { RootState } from '../state'
 import { StyledFingerboard } from '../styles'
 
 type FingerboardProps = {
-  instrument: number[]
   fretCount: number
   selected: Set<number | undefined>
   select: (tone: string) => void
@@ -13,7 +14,6 @@ type FingerboardProps = {
 }
 
 const FingerBoard = ({
-  instrument,
   fretCount,
   selected,
   select,
@@ -21,6 +21,12 @@ const FingerBoard = ({
   sharpen,
   flatten
 }: FingerboardProps) => {
+  const { instrument } = useSelector((state: RootState) => {
+    return {
+      instrument: state.instrument
+    }
+  })
+
   const strings = instrument.map((tuning, index) => (
     <String
       key={index}

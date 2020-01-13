@@ -33,10 +33,6 @@ const App = () => {
     oscillator.stop(audioContext.currentTime + 0.4)
   }
 
-  const changeInstrument = (instrument: number[]) => {
-    setInstrument(instrument)
-  }
-
   const addLowString = () => {
     instrument.length < 8 &&
       setInstrument(prevState => [instrument[0] - 5, ...prevState])
@@ -73,7 +69,6 @@ const App = () => {
     <StyledApp>
       <GlobalStyle />
       <Fingerboard
-        instrument={instrument}
         fretCount={26}
         selected={selected}
         select={select}
@@ -86,7 +81,6 @@ const App = () => {
         removeLowString={removeLowString}
         removeHighString={removeHighString}
         addHighString={addHighString}
-        changeInstrument={changeInstrument}
       />
     </StyledApp>
   )
