@@ -2,21 +2,21 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTransition, animated } from 'react-spring'
 import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi'
-import { instruments } from '../instruments'
+import { instruments } from '../helpers/instruments'
 import {
   changeInstrument,
   toggleMenu,
   toggleAccidentals,
   toggleSound,
   RootState
-} from '../state'
+} from '../helpers/state'
 import {
   StyledMenu,
   MenuItem,
   SoundToggle,
   AccidentalToggle,
   Instrument
-} from '../styles'
+} from '../helpers/styles'
 
 const Menu = () => {
   const dispatch = useDispatch()

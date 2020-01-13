@@ -7,8 +7,8 @@ import {
   removeLowString,
   addHighString,
   removeHighString
-} from '../state'
-import { StyledNav, Adder, Remover } from '../styles'
+} from '../helpers/state'
+import { StyledNav, Adder, Remover } from '../helpers/styles'
 
 const Nav = () => {
   const dispatch = useDispatch()

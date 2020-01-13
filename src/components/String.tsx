@@ -3,44 +3,41 @@ import { useSelector, useDispatch } from 'react-redux'
 import { note } from '@tonaljs/tonal'
 import { midiToNoteName } from '@tonaljs/midi'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { sharpen, flatten, RootState } from '../state'
-import { colors, StyledString, Sharpen, Flatten, NotePosition } from '../styles'
+import { playSound } from '../helpers/audio'
+import { sharpen, flatten, select, RootState } from '../helpers/state'
+import {
+  colors,
+  StyledString,
+  Sharpen,
+  Flatten,
+  NotePosition
+} from '../helpers/styles'
 
 type StringProps = {
   index: number
   tuning: number
-  fretCount: number
-  selected: Set<number | undefined>
-  select: (tone: string) => void
-  playSound: (tone: string) => void
 }
 
-const String = ({
-  index,
-  tuning,
-  fretCount,
-  selected,
-  select,
-  playSound
-}: StringProps) => {
+const String = ({ index, tuning }: StringProps) => {
   const dispatch = useDispatch()
-  const { isSharps, hasSound } = useSelector((state: RootState) => {
+  const { selected, isSharps, hasSound } = useSelector((state: RootState) => {
     return {
+      selected: state.selected,
       isSharps: state.settings.isSharps,
       hasSound: state.settings.hasSound
     }
   })
 
-  const frets = Array.from({ length: fretCount }, (_v, i) => i)
+  const frets = Array.from({ length: 26 }, (_v, i) => i)
   const tones = frets.map(fret =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
   )
   const notes = tones.map((tone, index) => (
     <NotePosition
       key={index}
-      isSelected={selected.has(note(tone).chroma)}
+      isSelected={selected.includes(note(tone).chroma as number)}
       onClick={() => {
-        select(tone)
+        dispatch(select(tone))
         hasSound && playSound(tone)
       }}
     >

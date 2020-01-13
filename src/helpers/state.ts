@@ -1,11 +1,18 @@
 import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit'
+import { note } from '@tonaljs/tonal'
 import { instruments } from './instruments'
 
 const selected = createSlice({
   name: 'selected',
-  initialState: [], // cannot be new Set()
+  initialState: [] as number[],
   reducers: {
-    // select: (state, payload) => payload
+    select: (state, { payload }) => {
+      const pc = note(payload).chroma as number
+      const selected = state.includes(pc)
+        ? state.filter(e => e !== pc)
+        : state.concat(pc)
+      return selected
+    }
   }
 })
 
@@ -13,15 +20,11 @@ const instrument = createSlice({
   name: 'instrument',
   initialState: instruments.guitar,
   reducers: {
-    changeInstrument: (_state, action) => action.payload,
-    sharpen: (state, action) =>
-      state.map((tuning, index) =>
-        index === action.payload ? tuning + 1 : tuning
-      ),
-    flatten: (state, action) =>
-      state.map((tuning, index) =>
-        index === action.payload ? tuning - 1 : tuning
-      ),
+    changeInstrument: (_state, { payload }) => payload,
+    sharpen: (state, { payload }) =>
+      state.map((tuning, index) => (index === payload ? tuning + 1 : tuning)),
+    flatten: (state, { payload }) =>
+      state.map((tuning, index) => (index === payload ? tuning - 1 : tuning)),
     addLowString: state =>
       state.length < 8 ? [state[0] - 5].concat(state) : state,
     removeLowString: state => (state.length > 1 ? state.slice(1) : state),
@@ -45,7 +48,7 @@ const settings = createSlice({
   }
 })
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   selected: selected.reducer,
   instrument: instrument.reducer,
   settings: settings.reducer
@@ -57,7 +60,7 @@ export const store = configureStore({
   reducer: rootReducer
 })
 
-// export const {} = selected.actions
+export const { select } = selected.actions
 export const {
   changeInstrument,
   sharpen,
