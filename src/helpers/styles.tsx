@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components/macro"
+import styled, { createGlobalStyle } from "styled-components/macro";
 
 // Variables
 export const colors = {
@@ -7,16 +7,16 @@ export const colors = {
   grey: "#555555",
   highlight: "#ff851b",
   background: "#333333",
-  transparent: "#00000000"
-}
+  transparent: "#00000000",
+};
 
 export const vars = {
   length: "2.5rem",
   smallBoxShadow: "0px 5px 25px 0 rgba(0, 0, 0, 0.3)",
   bigBoxShadow: "0px 5px 50px 0 rgba(0, 0, 0, 0.3)",
   transition: "all 0.175s ease-in-out",
-  borderRadius: "0.75rem 0.75rem 0 0"
-}
+  borderRadius: "0.75rem 0.75rem 0 0",
+};
 
 // Global style
 export const GlobalStyle = createGlobalStyle`
@@ -43,7 +43,7 @@ export const GlobalStyle = createGlobalStyle`
   .icon {
     vertical-align: middle;
   }
-`
+`;
 
 //Components
 export const StyledApp = styled.div`
@@ -53,7 +53,7 @@ export const StyledApp = styled.div`
   min-height: 100vh;
   background-color: ${colors.background};
   background-size: 100%;
-`
+`;
 
 export const StyledFingerboard = styled.div`
   display: flex;
@@ -62,16 +62,16 @@ export const StyledFingerboard = styled.div`
   justify-content: center;
   background-color: ${colors.dark};
   box-shadow: ${vars.smallBoxShadow};
-`
+`;
 
 export const StyledString = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 type NotePositionProps = {
-  isSelected: boolean
-}
+  isSelected: boolean;
+};
 
 export const NotePosition = styled.div<NotePositionProps>`
   display: flex;
@@ -80,8 +80,9 @@ export const NotePosition = styled.div<NotePositionProps>`
   width: ${vars.length};
   height: ${vars.length};
   border: none;
-  font-size: ${props => (props.isSelected ? "1.4rem" : "1rem")};
-  color: ${props => (props.isSelected ? colors.highlight : colors.grey)};
+  font-size: ${(props): string => (props.isSelected ? "1.4rem" : "1rem")};
+  color: ${(props): string =>
+    props.isSelected ? colors.highlight : colors.grey};
   transition: ${vars.transition};
   svg {
     position: absolute;
@@ -99,7 +100,7 @@ export const NotePosition = styled.div<NotePositionProps>`
     color: ${colors.highlight};
     font-size: 1.4rem;
   }
-`
+`;
 
 export const StyledNav = styled.div`
   display: flex;
@@ -113,14 +114,14 @@ export const StyledNav = styled.div`
   background-color: ${colors.light};
   color: ${colors.dark};
   box-shadow: ${vars.bigBoxShadow};
-`
+`;
 
 export const StyledMenu = styled.div`
   position: fixed;
   width: calc(8 / 5 * ${vars.length});
   bottom: ${vars.length};
   left: calc(50% - 8 / 5 / 2 * ${vars.length});
-`
+`;
 
 export const BaseButton = styled.button`
   border: none;
@@ -131,35 +132,35 @@ export const BaseButton = styled.button`
   :hover {
     color: ${colors.highlight};
   }
-`
+`;
 
-export const Adder = styled(BaseButton)``
+export const Adder = styled(BaseButton)``;
 
-export const Remover = styled(BaseButton)``
+export const Remover = styled(BaseButton)``;
 
 export const Sharpen = styled(BaseButton)`
   background-color: ${colors.light};
   height: calc(3 / 4 * ${vars.length});
-`
+`;
 
 export const Flatten = styled(BaseButton)`
   background-color: ${colors.light};
   height: calc(3 / 4 * ${vars.length});
-`
+`;
 
 export const MenuItem = styled(BaseButton)`
   background-color: ${colors.light};
   display: block;
   height: ${vars.length};
-`
+`;
 
 export const SoundToggle = styled(MenuItem)`
   border-radius: ${vars.borderRadius};
-`
+`;
 
 export const AccidentalToggle = styled(MenuItem)`
   border-bottom: 0.1rem solid;
   border-color: ${colors.grey};
-`
+`;
 
-export const Instrument = styled(MenuItem)``
+export const Instrument = styled(MenuItem)``;

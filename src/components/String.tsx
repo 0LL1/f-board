@@ -1,49 +1,49 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { note } from '@tonaljs/tonal'
-import { midiToNoteName } from '@tonaljs/midi'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { playSound } from '../helpers/audio'
-import { sharpen, flatten, select, RootState } from '../helpers/state'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { note } from "@tonaljs/tonal";
+import { midiToNoteName } from "@tonaljs/midi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { playSound } from "../helpers/audio";
+import { sharpen, flatten, select, RootState } from "../helpers/state";
 import {
   colors,
   StyledString,
   Sharpen,
   Flatten,
-  NotePosition
-} from '../helpers/styles'
+  NotePosition,
+} from "../helpers/styles";
 
 type StringProps = {
-  index: number
-  tuning: number
-}
+  index: number;
+  tuning: number;
+};
 
-const String = ({ index, tuning }: StringProps) => {
-  const dispatch = useDispatch()
+const String: React.FC<StringProps> = ({ index, tuning }: StringProps) => {
+  const dispatch = useDispatch();
   const { selected, isSharps, hasSound } = useSelector((state: RootState) => {
     return {
       selected: state.selected,
       isSharps: state.settings.isSharps,
-      hasSound: state.settings.hasSound
-    }
-  })
+      hasSound: state.settings.hasSound,
+    };
+  });
 
-  const frets = Array.from({ length: 26 }, (_v, i) => i)
-  const tones = frets.map(fret =>
+  const frets = Array.from({ length: 26 }, (_v, i) => i);
+  const tones = frets.map((fret) =>
     midiToNoteName(tuning + fret, { sharps: isSharps })
-  )
+  );
   const notes = tones.map((tone, index) => {
-    const isSelected = selected.includes(note(tone).chroma as number)
+    const isSelected = selected.includes(note(tone).chroma as number);
 
     return (
       <NotePosition
         key={index}
         isSelected={isSelected}
-        onClick={() => {
-          dispatch(select(tone))
-          hasSound && playSound(tone)
+        onClick={(): void => {
+          dispatch(select(tone));
+          hasSound && playSound(tone);
         }}
-        data-test={isSelected ? 'selected' : 'not-selected'}
+        data-test={isSelected ? "selected" : "not-selected"}
       >
         <svg width="40px" height="40px">
           <line
@@ -65,25 +65,29 @@ const String = ({ index, tuning }: StringProps) => {
         </svg>
         {note(tone).pc}
       </NotePosition>
-    )
-  })
+    );
+  });
   return (
     <StyledString>
       <Sharpen
-        onClick={() => dispatch(sharpen(index))}
+        onClick={(): { type: string; payload: number } =>
+          dispatch(sharpen(index))
+        }
         data-test={`sharpen-${index + 1}`}
       >
         <FiChevronUp className="icon" />
       </Sharpen>
       <Flatten
-        onClick={() => dispatch(flatten(index))}
+        onClick={(): { type: string; payload: number } =>
+          dispatch(flatten(index))
+        }
         data-test={`flatten-${index + 1}`}
       >
         <FiChevronDown className="icon" />
       </Flatten>
       <div data-test={`string-${index + 1}`}>{notes}</div>
     </StyledString>
-  )
-}
+  );
+};
 
-export default String
+export default String;

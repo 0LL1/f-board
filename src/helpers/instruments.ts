@@ -3,5 +3,5 @@ export const instruments = {
   cello: [36, 43, 50, 57],
   viola: [48, 55, 62, 69],
   violin: [55, 62, 69, 76],
-  guitar: [40, 45, 50, 55, 59, 64]
-}
+  guitar: [40, 45, 50, 55, 59, 64],
+};
